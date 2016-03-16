@@ -1,4 +1,10 @@
 package client.view;
 
-public class ToolbarView     {
+import javax.swing.*;
+
+public class ToolbarView extends JToolBar{
+
+    public ToolbarView(){
+        
+    }
 }
