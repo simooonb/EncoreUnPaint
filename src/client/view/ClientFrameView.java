@@ -7,7 +7,7 @@ import javax.swing.*;
 public class ClientFrameView extends JFrame {
     private Drawing drawing = new Drawing();
 
-    private ClientContainerView clientContainerView = new ClientContainerView(drawing);
+    private ClientContainerView clientContainerView = new ClientContainerView();
 
     public ClientFrameView() {
         add(clientContainerView);
