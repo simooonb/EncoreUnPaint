@@ -17,4 +17,12 @@ public class ClientFrameView extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
+
+    public Drawing getDrawing() {
+        return drawing;
+    }
+
+    public ClientContainerView getClientContainerView() {
+        return clientContainerView;
+    }
 }
