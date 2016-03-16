@@ -2,6 +2,7 @@ package client.controller;
 
 import client.view.ClientContainerView;
 import client.view.DrawingContainerView;
+import client.view.StatusAreaView;
 import client.view.ToolbarView;
 
 public class ClientContainerController {
@@ -12,8 +13,9 @@ public class ClientContainerController {
 
         ToolbarView toolbarView = clientContainerView.getToolbarView();
         DrawingContainerView drawingContainerView = clientContainerView.getDrawingContainerView();
+        StatusAreaView statusAreaView = clientContainerView.getStatusAreaView();
 
-        new ToolbarController(toolbarView);
+        new ToolbarController(toolbarView,statusAreaView);
         new DrawingContainerController(drawingContainerView);
     }
 }
