@@ -9,4 +9,12 @@ public class Drawing {
     public Drawing() {
         drawingComponents = new ArrayList<>();
     }
+
+    public List<DrawingComponent> getDrawingComponents() {
+        return drawingComponents;
+    }
+
+    public DrawingComponent getDrawingComponent(int id) {
+        return id >= 0 && id < drawingComponents.size() ? drawingComponents.get(id) : null;
+    }
 }
