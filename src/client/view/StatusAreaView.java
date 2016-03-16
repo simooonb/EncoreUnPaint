@@ -1,4 +1,9 @@
 package client.view;
 
-public class StatusAreaView {
+import javax.swing.*;
+
+public class StatusAreaView extends JTextArea {
+    public StatusAreaView() {
+        setEditable(false);
+    }
 }
