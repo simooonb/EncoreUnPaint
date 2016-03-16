@@ -46,6 +46,7 @@ public class ToolbarController {
         this.toolbarView.getColorChooser().addActionListener(e -> {
             drawingContainerView.setCurrentStatus("color");
             selectedColor = JColorChooser.showDialog(null, "Choose a color", selectedColor);
+            drawingContainerView.setCurrentColor(selectedColor);
             statusAreaView.editStatus("Color");
         });
     }
