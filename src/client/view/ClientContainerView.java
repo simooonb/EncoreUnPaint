@@ -2,7 +2,6 @@ package client.view;
 
 import javax.swing.*;
 import java.awt.*;
-import client.controller.ToolbarController;
 
 public class ClientContainerView extends JPanel {
     private DrawingContainerView drawingContainerView = new DrawingContainerView();
@@ -12,10 +11,20 @@ public class ClientContainerView extends JPanel {
     public ClientContainerView() {
         setLayout(new BorderLayout());
 
-        new ToolbarController(toolbarView);
-
         add(drawingContainerView, BorderLayout.CENTER);
         add(toolbarView, BorderLayout.WEST);
         add(statusAreaView, BorderLayout.SOUTH);
+    }
+
+    public DrawingContainerView getDrawingContainerView() {
+        return drawingContainerView;
+    }
+
+    public StatusAreaView getStatusAreaView() {
+        return statusAreaView;
+    }
+
+    public ToolbarView getToolbarView() {
+        return toolbarView;
     }
 }
