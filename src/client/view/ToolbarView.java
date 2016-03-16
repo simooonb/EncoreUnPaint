@@ -13,8 +13,16 @@ public class ToolbarView extends JToolBar{
     private JButton foregroundColorChooser;
     private JButton backgroundColorChooser;
 
+    private final Integer jtoolbarWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.2);
+    private final Integer jtoolbarHeight = (Toolkit.getDefaultToolkit().getScreenSize().height)-155;
+
     public ToolbarView(){
         super(null, JToolBar.VERTICAL);
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+        setSize(jtoolbarWidth,jtoolbarHeight);
+        setPreferredSize((getSize()));
+        setMaximumSize(getSize());
+        setMinimumSize(getSize());
         this.setFloatable(true);
         this.setRollover(true);
         this.setBorderPainted(true);
@@ -34,25 +42,32 @@ public class ToolbarView extends JToolBar{
 
     private void initButton(){
         selectForm = new JButton("Select");
+        setButtonSize(selectForm,jtoolbarWidth -10,jtoolbarHeight/7);
         fillForm = new JButton("Fill");
+        setButtonSize(fillForm,jtoolbarWidth -10,jtoolbarHeight/7);
         drawOval = new JButton("Oval");
+        setButtonSize(drawOval,jtoolbarWidth -10,jtoolbarHeight/7);
         drawRectangle = new JButton("Rectangle");
+        setButtonSize(drawRectangle,jtoolbarWidth -10,jtoolbarHeight/7);
         drawLine = new JButton("Line");
+        setButtonSize(drawLine,jtoolbarWidth -10,jtoolbarHeight/7);
         buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
         foregroundColorChooser = new JButton();
-        foregroundColorChooser.setPreferredSize(new Dimension(40,40));
-        foregroundColorChooser.setMaximumSize(foregroundColorChooser.getPreferredSize());
-        foregroundColorChooser.setMinimumSize(foregroundColorChooser.getPreferredSize());
+        setButtonSize(foregroundColorChooser,(jtoolbarWidth/2)-10,jtoolbarHeight/7);
         foregroundColorChooser.setBackground(Color.BLACK);
         backgroundColorChooser = new JButton();
-        backgroundColorChooser.setPreferredSize(new Dimension(40,40));
-        backgroundColorChooser.setMaximumSize(backgroundColorChooser.getPreferredSize());
-        backgroundColorChooser.setMinimumSize(backgroundColorChooser.getPreferredSize());
+        setButtonSize(backgroundColorChooser,(jtoolbarWidth/2)-10,jtoolbarHeight/7);
         backgroundColorChooser.setBackground(Color.BLACK);
         buttonPanel.add(backgroundColorChooser);
         buttonPanel.add(foregroundColorChooser);
     }
-    
+
+    private void setButtonSize(JButton button, int width, int height){
+        button.setPreferredSize(new Dimension(width,height));
+        button.setMaximumSize(button.getPreferredSize());
+        button.setMinimumSize(button.getPreferredSize());
+    }
     public JButton getSelectForm() { return selectForm; }
 
     public JButton getFillForm() { return fillForm; }
