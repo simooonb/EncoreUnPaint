@@ -1,6 +1,7 @@
 package client.view;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ToolbarView extends JToolBar{
     private JButton selectForm;
@@ -8,7 +9,9 @@ public class ToolbarView extends JToolBar{
     private JButton drawOval;
     private JButton drawRectangle;
     private JButton drawLine;
-    private JButton colorChooser;
+    private JPanel buttonPanel;
+    private JButton foregroundColorChooser;
+    private JButton backgroundColorChooser;
 
     public ToolbarView(){
         super(null, JToolBar.VERTICAL);
@@ -26,7 +29,7 @@ public class ToolbarView extends JToolBar{
         this.addSeparator();
         this.add(drawLine);
         this.addSeparator();
-        this.add(colorChooser);
+        this.add(buttonPanel);
     }
 
     private void initButton(){
@@ -35,9 +38,21 @@ public class ToolbarView extends JToolBar{
         drawOval = new JButton("Oval");
         drawRectangle = new JButton("Rectangle");
         drawLine = new JButton("Line");
-        colorChooser = new JButton("Color");
+        buttonPanel = new JPanel();
+        foregroundColorChooser = new JButton();
+        foregroundColorChooser.setPreferredSize(new Dimension(40,40));
+        foregroundColorChooser.setMaximumSize(foregroundColorChooser.getPreferredSize());
+        foregroundColorChooser.setMinimumSize(foregroundColorChooser.getPreferredSize());
+        foregroundColorChooser.setBackground(Color.BLACK);
+        backgroundColorChooser = new JButton();
+        backgroundColorChooser.setPreferredSize(new Dimension(40,40));
+        backgroundColorChooser.setMaximumSize(backgroundColorChooser.getPreferredSize());
+        backgroundColorChooser.setMinimumSize(backgroundColorChooser.getPreferredSize());
+        backgroundColorChooser.setBackground(Color.BLACK);
+        buttonPanel.add(backgroundColorChooser);
+        buttonPanel.add(foregroundColorChooser);
     }
-
+    
     public JButton getSelectForm() { return selectForm; }
 
     public JButton getFillForm() { return fillForm; }
@@ -48,5 +63,7 @@ public class ToolbarView extends JToolBar{
 
     public JButton getDrawLine() { return drawLine; }
 
-    public JButton getColorChooser() { return colorChooser; }
+    public JButton getForegroundColorChooser() { return foregroundColorChooser; }
+
+    public JButton getBackgroundColorChooser() { return backgroundColorChooser; }
 }

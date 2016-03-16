@@ -43,11 +43,20 @@ public class ToolbarController {
             statusAreaView.editStatus("Rectangle");
         });
 
-        this.toolbarView.getColorChooser().addActionListener(e -> {
-            drawingContainerView.setCurrentStatus("color");
+        this.toolbarView.getBackgroundColorChooser().addActionListener(e -> {
+            drawingContainerView.setCurrentStatus("backgroundColor");
             selectedColor = JColorChooser.showDialog(null, "Choose a color", selectedColor);
             drawingContainerView.setCurrentColor(selectedColor);
-            statusAreaView.editStatus("Color");
+            toolbarView.getBackgroundColorChooser().setBackground(selectedColor);
+            statusAreaView.editStatus("Background Color");
+        });
+
+        this.toolbarView.getForegroundColorChooser().addActionListener(e -> {
+            drawingContainerView.setCurrentStatus("foregroundColor");
+            selectedColor = JColorChooser.showDialog(null, "Choose a color", selectedColor);
+            drawingContainerView.setCurrentColor(selectedColor);
+            toolbarView.getForegroundColorChooser().setBackground(selectedColor);
+            statusAreaView.editStatus("Foreground Color");
         });
     }
 

@@ -15,7 +15,7 @@ public class ClientContainerController {
         DrawingContainerView drawingContainerView = clientContainerView.getDrawingContainerView();
         StatusAreaView statusAreaView = clientContainerView.getStatusAreaView();
 
-        new ToolbarController(toolbarView,statusAreaView);
+        new ToolbarController(toolbarView,statusAreaView,drawingContainerView);
         new DrawingContainerController(drawingContainerView);
     }
 }
