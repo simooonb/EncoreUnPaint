@@ -11,14 +11,11 @@ public class DrawingContainerView extends JPanel {
     private String currentStatus = "none";
     private List<DrawingComponentView> drawingComponentViewList = new ArrayList<>();
     private Drawing drawing;
+    private Color currentColor = Color.BLACK;
 
     public DrawingContainerView(Drawing drawing) {
         this.drawing = drawing;
 
-    private String currentStatus = "None";
-    private Color currentColor = Color.BLACK;
-
-    public DrawingContainerView() {
         setBackground(Color.white);
         setSize(500, 500);
     }

@@ -25,27 +25,27 @@ public class DrawingContainerController {
         public void mouseClicked(MouseEvent e) {
             switch (drawingContainerView.getCurrentStatus()) {
                 case "selection": {
-                    updateView();
+
                     break;
                 }
 
                 case "fill": {
-                    updateView();
+
                     break;
                 }
 
                 case "line": {
-                    updateView();
+
                     break;
                 }
 
                 case "rectangle": {
-                    updateView();
+
                     break;
                 }
 
                 case "oval": {
-                    updateView();
+
                     break;
                 }
             }
