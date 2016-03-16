@@ -12,12 +12,43 @@ public class DrawingContainerController {
         this.drawingContainerView = drawingContainerView;
 
         drawingContainerView.addMouseListener(new DrawingContainerListener());
+
+        updateView();
+    }
+
+    private void updateView() {
+        drawingContainerView.update();
     }
 
     class DrawingContainerListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("clicked");
+            switch (drawingContainerView.getCurrentStatus()) {
+                case "selection": {
+
+                    break;
+                }
+
+                case "fill": {
+
+                    break;
+                }
+
+                case "line": {
+
+                    break;
+                }
+
+                case "rectangle": {
+
+                    break;
+                }
+
+                case "oval": {
+
+                    break;
+                }
+            }
         }
     }
 }

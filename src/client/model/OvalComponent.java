@@ -8,4 +8,8 @@ public class OvalComponent extends DrawingComponent {
     public OvalComponent() {
         
     }
+
+    public Rectangle getBoundingBox() {
+        return boundingBox;
+    }
 }
