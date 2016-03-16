@@ -1,20 +1,16 @@
 package client.view;
 
-import client.model.Drawing;
-
 import javax.swing.*;
 import java.awt.*;
+import client.controller.ToolbarController;
 
 public class ClientContainerView extends JPanel {
     private DrawingContainerView drawingContainerView = new DrawingContainerView();
     private StatusAreaView statusAreaView = new StatusAreaView();
     private ToolbarView toolbarView = new ToolbarView();
 
-    private Drawing drawing;
-
-    public ClientContainerView(Drawing drawing) {
-        this.drawing = drawing;
-
+    public ClientContainerView() {
+        new ToolbarController(toolbarView);
         add(drawingContainerView, BorderLayout.CENTER);
         add(toolbarView, BorderLayout.WEST);
         add(statusAreaView, BorderLayout.SOUTH);
