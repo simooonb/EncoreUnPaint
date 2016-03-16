@@ -1,7 +1,6 @@
 package client.view;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ToolbarView extends JToolBar{
     private JButton selectForm;
@@ -38,4 +37,16 @@ public class ToolbarView extends JToolBar{
         drawLine = new JButton("Line");
         colorChooser = new JButton("Color");
     }
+
+    public JButton getSelectForm() { return selectForm; }
+
+    public JButton getFillForm() { return fillForm; }
+
+    public JButton getDrawOval() { return drawOval; }
+
+    public JButton getDrawRectangle() { return drawRectangle; }
+
+    public JButton getDrawLine() { return drawLine; }
+
+    public JButton getColorChooser() { return colorChooser; }
 }
