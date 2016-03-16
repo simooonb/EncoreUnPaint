@@ -2,9 +2,10 @@ package client.view;
 
 import client.model.DrawingComponent;
 
+import javax.swing.*;
 import java.awt.*;
 
-abstract public class DrawingComponentView {
+abstract public class DrawingComponentView extends JComponent {
     private DrawingComponent drawingComponent;
     private Point anchorPoint;
 
