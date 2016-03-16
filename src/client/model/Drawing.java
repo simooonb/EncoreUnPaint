@@ -17,4 +17,8 @@ public class Drawing {
     public DrawingComponent getDrawingComponent(int id) {
         return id >= 0 && id < drawingComponents.size() ? drawingComponents.get(id) : null;
     }
+
+    public void addDrawingComponent(DrawingComponent drawingComponent) {
+        drawingComponents.add(drawingComponent);
+    }
 }

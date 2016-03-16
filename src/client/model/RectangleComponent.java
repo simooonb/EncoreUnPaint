@@ -8,4 +8,8 @@ public class RectangleComponent extends DrawingComponent {
     public RectangleComponent() {
 
     }
+
+    public Rectangle getBoundingBox() {
+        return boundingBox;
+    }
 }
