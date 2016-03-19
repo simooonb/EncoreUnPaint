@@ -13,7 +13,8 @@ public class DrawingContainerView extends JPanel{
     private String currentStatus = "none";
     private List<DrawingComponentView> drawingComponentViewList = new ArrayList<>();
     private Drawing drawing;
-    private Color currentColor = Color.BLACK;
+    private Color currentColorForeground = Color.BLACK;
+    private Color currentColorBackground = Color.BLACK;
 
     public DrawingContainerView(Drawing drawing) {
         this.drawing = drawing;
@@ -42,7 +43,20 @@ public class DrawingContainerView extends JPanel{
 
     public void setCurrentStatus(String currentStatus) { this.currentStatus = currentStatus; }
 
-    public Color getCurrentColor() { return currentColor; }
 
-    public void setCurrentColor(Color currentColor) { this.currentColor = currentColor; }
+    public Color getCurrentColorForeground() {
+        return currentColorForeground;
+    }
+
+    public void setCurrentColorForeground(Color currentColorForeground) {
+        this.currentColorForeground = currentColorForeground;
+    }
+
+    public Color getCurrentColorBackground() {
+        return currentColorBackground;
+    }
+
+    public void setCurrentColorBackground(Color currentColorBackground) {
+        this.currentColorBackground = currentColorBackground;
+    }
 }

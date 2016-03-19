@@ -46,7 +46,7 @@ public class ToolbarController {
         this.toolbarView.getBackgroundColorChooser().addActionListener(e -> {
             drawingContainerView.setCurrentStatus("backgroundColor");
             selectedColor = JColorChooser.showDialog(null, "Choose a color", selectedColor);
-            drawingContainerView.setCurrentColor(selectedColor);
+            drawingContainerView.setCurrentColorBackground(selectedColor);
             toolbarView.getBackgroundColorChooser().setBackground(selectedColor);
             statusAreaView.editStatus("Background Color");
         });
@@ -54,8 +54,8 @@ public class ToolbarController {
         this.toolbarView.getForegroundColorChooser().addActionListener(e -> {
             drawingContainerView.setCurrentStatus("foregroundColor");
             selectedColor = JColorChooser.showDialog(null, "Choose a color", selectedColor);
-            drawingContainerView.setCurrentColor(selectedColor);
-            toolbarView.getForegroundColorChooser().setBackground(selectedColor);
+            drawingContainerView.setCurrentColorForeground(selectedColor);
+            toolbarView.getForegroundColorChooser().setForeground(selectedColor);
             statusAreaView.editStatus("Foreground Color");
         });
     }

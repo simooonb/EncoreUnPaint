@@ -6,6 +6,7 @@ public class OvalComponent extends DrawingComponent {
     private Rectangle boundingBox;
 
     public OvalComponent(Rectangle boundingBox) {
+        super(Color.black);
         this.boundingBox = boundingBox;
     }
 
