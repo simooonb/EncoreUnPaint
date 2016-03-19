@@ -8,7 +8,7 @@ import client.model.RectangleComponent;
 import javax.swing.*;
 import java.awt.*;
 
-abstract public class DrawingComponentView extends JComponent {
+abstract public class DrawingComponentView extends JPanel {
     private DrawingComponent drawingComponent;
     private Point anchorPoint;
 
@@ -17,7 +17,15 @@ abstract public class DrawingComponentView extends JComponent {
     }
 
     public void update() {
+        updateSize();
         updateLocation();
+    }
+
+    private void updateSize() {
+        Point position = drawingComponent.getPosition();
+        Dimension size = drawingComponent.getSize();
+
+        setBounds(position.x, position.y, size.width, size.height);
     }
 
     public void updateLocation() {

@@ -15,12 +15,16 @@ public class LineComponentView extends DrawingComponentView {
 
     @Override
     public void update() {
+        System.out.println("lineview update");
         super.update();
+        repaint();
+        revalidate();
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        System.out.println("lineview paintcomponent");
         g.setColor(line.getColor());
         g.drawLine(line.getFirstPoint().x, line.getFirstPoint().y, line.getSecondPoint().x, line.getSecondPoint().y);
     }

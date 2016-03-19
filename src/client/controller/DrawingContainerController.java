@@ -24,6 +24,7 @@ public class DrawingContainerController implements DrawingListener {
     private void updateView() {
         if (drawingContainerView.getDrawingComponentViewList().size() != drawingContainerView.getDrawing().getDrawingComponents().size()) {
             refreshViews();
+            System.out.println("refreshed");
         }
 
         drawingContainerView.update();
@@ -70,6 +71,7 @@ public class DrawingContainerController implements DrawingListener {
 
     @Override
     public void onDrawingComponentAdded(DrawingComponent drawingComponent) {
+        System.out.println("on drawing component added drawingcontainercontroller");
         updateView();
     }
 
@@ -111,13 +113,13 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "line": {
-                        drawingContainerView.getDrawing().addDrawingComponent(new LineComponent(startingPoint,endingPoint));
+                    drawingContainerView.getDrawing().addDrawingComponent(new LineComponent(startingPoint,endingPoint));
                     break;
                 }
 
                 case "rectangle": {
-                        Dimension dimRectangle = new Dimension(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
-                        drawingContainerView.getDrawing().addDrawingComponent(new RectangleComponent(new Rectangle(startingPoint,dimRectangle)));
+                    Dimension dimRectangle = new Dimension(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
+                    drawingContainerView.getDrawing().addDrawingComponent(new RectangleComponent(new Rectangle(startingPoint,dimRectangle)));
                     break;
                 }
 

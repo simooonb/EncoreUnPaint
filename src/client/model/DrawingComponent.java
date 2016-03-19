@@ -7,18 +7,11 @@ import java.util.List;
 abstract public class DrawingComponent {
     private Color color;
     private List<DrawingComponentListener> drawingComponentListeners = new ArrayList<>();
+    private Point position = new Point(0,0);
+    private Dimension size = new Dimension(50,50);
 
     public DrawingComponent(Color color){
         setColor(color);
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-        fireColorChanged();
     }
 
     public void addDrawingComponentListener(DrawingComponentListener listener) {
@@ -49,5 +42,30 @@ abstract public class DrawingComponent {
 
     public void remove() {
         fireRemoved();
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+    public Dimension getSize() {
+        return size;
+    }
+
+    public void setSize(Dimension size) {
+        this.size = size;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        fireColorChanged();
     }
 }

@@ -25,6 +25,7 @@ public class DrawingContainerView extends JPanel{
     }
 
     public void update() {
+        System.out.println("update drawingcontainerview");
         removeAll();
 
         for (DrawingComponentView drawingComponentView : drawingComponentViewList) {
@@ -32,6 +33,7 @@ public class DrawingContainerView extends JPanel{
             add(drawingComponentView);
         }
 
+        revalidate();
         repaint();
     }
 
