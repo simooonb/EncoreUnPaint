@@ -5,8 +5,15 @@ import client.model.OvalComponent;
 public class OvalComponentView extends DrawingComponentView {
     private OvalComponent oval;
 
-    public OvalComponentView() {
+    public OvalComponentView(OvalComponent oval) {
+        super(oval);
+        this.oval = oval;
+        update();
+    }
 
+    @Override
+    public void update() {
+        super.update();
     }
 
     public OvalComponent getOval() {

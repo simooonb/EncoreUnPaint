@@ -12,11 +12,15 @@ abstract public class DrawingComponentView extends JComponent {
     private DrawingComponent drawingComponent;
     private Point anchorPoint;
 
+    public DrawingComponentView(DrawingComponent drawingComponent) {
+        this.drawingComponent = drawingComponent;
+    }
+
     public void update() {
         updateLocation();
     }
 
-    private void updateLocation() {
+    public void updateLocation() {
         if (drawingComponent instanceof LineComponent) {
             setLocation((((LineComponent) drawingComponent).getFirstPoint().x + ((LineComponent) drawingComponent).getSecondPoint().x) / 2,
                         (((LineComponent) drawingComponent).getFirstPoint().y + ((LineComponent) drawingComponent).getSecondPoint().y) / 2);

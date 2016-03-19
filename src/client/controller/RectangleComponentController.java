@@ -7,7 +7,17 @@ public class RectangleComponentController extends DrawingComponentController {
 
     public RectangleComponentController(RectangleComponentView rectangleComponentView) {
         super(rectangleComponentView);
-
+        rectangleComponentView.getDrawingComponent().addDrawingComponentListener(this);
         this.rectangleComponentView = rectangleComponentView;
+    }
+
+    @Override
+    public void onRemoved() {
+
+    }
+
+    @Override
+    public void onColorChanged() {
+
     }
 }

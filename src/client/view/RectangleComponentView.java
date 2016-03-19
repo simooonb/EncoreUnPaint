@@ -5,8 +5,15 @@ import client.model.RectangleComponent;
 public class RectangleComponentView extends DrawingComponentView {
     private RectangleComponent rectangle;
 
-    public RectangleComponentView() {
+    public RectangleComponentView(RectangleComponent rectangle) {
+        super(rectangle);
+        this.rectangle = rectangle;
+        update();
+    }
 
+    @Override
+    public void update() {
+        super.update();
     }
 
     public RectangleComponent getRectangle() {

@@ -7,7 +7,17 @@ public class LineComponentController extends DrawingComponentController {
 
     public LineComponentController(LineComponentView lineComponentView) {
         super(lineComponentView);
-
+        lineComponentView.getDrawingComponent().addDrawingComponentListener(this);
         this.lineComponentView = lineComponentView;
+    }
+
+    @Override
+    public void onRemoved() {
+
+    }
+
+    @Override
+    public void onColorChanged() {
+
     }
 }

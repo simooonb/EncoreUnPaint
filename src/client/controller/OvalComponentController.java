@@ -7,7 +7,17 @@ public class OvalComponentController extends DrawingComponentController {
 
     public OvalComponentController(OvalComponentView ovalComponentView) {
         super(ovalComponentView);
-
+        ovalComponentView.getDrawingComponent().addDrawingComponentListener(this);
         this.ovalComponentView = ovalComponentView;
+    }
+
+    @Override
+    public void onRemoved() {
+
+    }
+
+    @Override
+    public void onColorChanged() {
+
     }
 }

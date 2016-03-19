@@ -7,8 +7,15 @@ import java.awt.*;
 public class LineComponentView extends DrawingComponentView {
     private LineComponent line;
 
-    public LineComponentView() {
+    public LineComponentView(LineComponent line) {
+        super(line);
+        this.line = line;
+        update();
+    }
 
+    @Override
+    public void update() {
+        super.update();
     }
 
     @Override
