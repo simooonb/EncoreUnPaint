@@ -4,10 +4,12 @@ import client.model.Drawing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrawingContainerView extends JPanel {
+public class DrawingContainerView extends JPanel{
     private String currentStatus = "none";
     private List<DrawingComponentView> drawingComponentViewList = new ArrayList<>();
     private Drawing drawing;
@@ -17,7 +19,8 @@ public class DrawingContainerView extends JPanel {
         this.drawing = drawing;
 
         setBackground(Color.white);
-        setSize(500, 500);
+        setSize((int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.75), Toolkit.getDefaultToolkit().getScreenSize().height-155);
+        setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     public void update() {
@@ -30,6 +33,10 @@ public class DrawingContainerView extends JPanel {
 
         repaint();
     }
+
+    public List<DrawingComponentView> getDrawingComponentViewList() { return drawingComponentViewList; }
+
+    public Drawing getDrawing() { return drawing; }
 
     public String getCurrentStatus() { return currentStatus; }
 

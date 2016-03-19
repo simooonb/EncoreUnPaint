@@ -19,6 +19,7 @@ public class Drawing {
     }
 
     public void addDrawingComponent(DrawingComponent drawingComponent) {
-        drawingComponents.add(drawingComponent);
+        System.out.println("add : "+drawingComponent);
+        drawingComponents.add(drawingComponent); // think to informate the view of the adding component ?
     }
 }
