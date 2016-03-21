@@ -8,6 +8,7 @@ public class RectangleComponentView extends DrawingComponentView {
     public RectangleComponentView(RectangleComponent rectangle) {
         super(rectangle);
         this.rectangle = rectangle;
+        setOpaque(false);
         update();
     }
 

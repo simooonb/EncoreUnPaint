@@ -37,6 +37,10 @@ public class DrawingContainerView extends JPanel{
         repaint();
     }
 
+    public void addView(DrawingComponentView drawingComponentView){
+        drawingComponentViewList.add(drawingComponentView);
+    }
+
     public List<DrawingComponentView> getDrawingComponentViewList() { return drawingComponentViewList; }
 
     public Drawing getDrawing() { return drawing; }

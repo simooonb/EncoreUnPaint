@@ -24,7 +24,6 @@ public class DrawingContainerController implements DrawingListener {
     private void updateView() {
         if (drawingContainerView.getDrawingComponentViewList().size() != drawingContainerView.getDrawing().getDrawingComponents().size()) {
             refreshViews();
-            System.out.println("refreshed");
         }
 
         drawingContainerView.update();
@@ -32,7 +31,7 @@ public class DrawingContainerController implements DrawingListener {
 
     private void refreshViews() {
         drawingContainerView.getDrawingComponentViewList().clear();
-
+        System.out.println("refresh");
         for (DrawingComponent component : drawingContainerView.getDrawing().getDrawingComponents()) {
             DrawingComponentView drawingComponentView;
 
@@ -50,6 +49,7 @@ public class DrawingContainerController implements DrawingListener {
             }
 
             drawingContainerView.add(drawingComponentView);
+            drawingContainerView.addView(drawingComponentView);
             drawingComponentView.getDrawingComponent().addDrawingComponentListener(new DrawingComponentListener() {
                 @Override
                 public void onMoved() {
@@ -83,7 +83,6 @@ public class DrawingContainerController implements DrawingListener {
     class DrawingContainerListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent me) {
-            System.out.println("mouse pressed");
             String currentStatus = drawingContainerView.getCurrentStatus();
             if(currentStatus.equals("none"))
                 return;
@@ -99,7 +98,6 @@ public class DrawingContainerController implements DrawingListener {
 
         @Override
         public void mouseReleased(MouseEvent me){
-            System.out.println("mouse released");
             endingPoint = me.getPoint();
             switch (drawingContainerView.getCurrentStatus()) {
                 case "selection": {

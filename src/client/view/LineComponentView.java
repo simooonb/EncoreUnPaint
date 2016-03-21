@@ -10,6 +10,7 @@ public class LineComponentView extends DrawingComponentView {
     public LineComponentView(LineComponent line) {
         super(line);
         this.line = line;
+        setOpaque(false);
         update();
     }
 

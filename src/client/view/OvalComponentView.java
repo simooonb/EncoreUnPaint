@@ -8,6 +8,7 @@ public class OvalComponentView extends DrawingComponentView {
     public OvalComponentView(OvalComponent oval) {
         super(oval);
         this.oval = oval;
+        setOpaque(false);
         update();
     }
 
