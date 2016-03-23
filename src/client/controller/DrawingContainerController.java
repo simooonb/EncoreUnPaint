@@ -123,20 +123,19 @@ public class DrawingContainerController implements DrawingListener {
                         startingPoint.y = endingPoint.y;
                         endingPoint.y = tmp;
                     }
-
-                    drawingContainerView.getDrawing().addDrawingComponent(new LineComponent(startingPoint,endingPoint));
+                    drawingContainerView.getDrawing().addDrawingComponent(new LineComponent(startingPoint,endingPoint,drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground()));
                     break;
                 }
 
                 case "rectangle": {
                     Dimension dimRectangle = new Dimension(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
-                    drawingContainerView.getDrawing().addDrawingComponent(new RectangleComponent(new Rectangle(startingPoint,dimRectangle)));
+                    drawingContainerView.getDrawing().addDrawingComponent(new RectangleComponent(new Rectangle(startingPoint,dimRectangle),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground()));
                     break;
                 }
 
                 case "oval": {
                     Dimension dimOval = new Dimension(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
-                    drawingContainerView.getDrawing().addDrawingComponent(new OvalComponent(new Rectangle(startingPoint,dimOval)));
+                    drawingContainerView.getDrawing().addDrawingComponent(new OvalComponent(new Rectangle(startingPoint,dimOval),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground()));
                     break;
                 }
 

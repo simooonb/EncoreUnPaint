@@ -17,7 +17,6 @@ public class LineComponentView extends DrawingComponentView {
 
     @Override
     public void update() {
-        System.out.println("lineview update");
         super.update();
         repaint();
         revalidate();
@@ -28,8 +27,8 @@ public class LineComponentView extends DrawingComponentView {
         super.paintComponent(g);
         if(g instanceof Graphics2D){
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setPaint(line.getColor());
-            g2d.setStroke(new BasicStroke(2));
+            g2d.setPaint(line.getBackgroundColor());
+            g2d.setStroke(new BasicStroke(1));
             g2d.draw(new Line2D.Float(0,0,line.getSecondPoint().x-line.getFirstPoint().x,line.getSecondPoint().y-line.getFirstPoint().y));
         }
         g.dispose();

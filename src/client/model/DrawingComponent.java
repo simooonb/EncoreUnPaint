@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract public class DrawingComponent {
-    private Color color;
+    private Color backgroundColor;
+    private Color foreGroundColor;
     private List<DrawingComponentListener> drawingComponentListeners = new ArrayList<>();
     private Point position = new Point(0,0);
     private Dimension size = new Dimension(50,50);
 
-    public DrawingComponent(Point position,Dimension size,Color color){
+    public DrawingComponent(Point position,Dimension size,Color backgroundColor, Color foreGroundColor){
        this.position = position;
         this.size = size;
-        this.color = color;
+        this.backgroundColor = backgroundColor;
+        this.foreGroundColor = foreGroundColor;
     }
 
     public void addDrawingComponentListener(DrawingComponentListener listener) {
@@ -62,12 +64,11 @@ abstract public class DrawingComponent {
         this.size = size;
     }
 
-    public Color getColor() {
-        return color;
+    public Color getBackgroundColor() {
+        return backgroundColor;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-        fireColorChanged();
+    public Color getForeGroundColor() {
+        return foreGroundColor;
     }
 }

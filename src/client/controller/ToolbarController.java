@@ -11,7 +11,8 @@ public class ToolbarController {
     private ToolbarView toolbarView;
     private StatusAreaView statusAreaView;
     private DrawingContainerView drawingContainerView;
-    private Color selectedColor = Color.BLACK;
+    private Color selectedColorForeground = Color.BLACK;
+    private Color selectedColorBackground = Color.BLACK;
 
     public ToolbarController(ToolbarView toolbarView, StatusAreaView statusAreaView, DrawingContainerView drawingContainerView) {
 
@@ -45,22 +46,26 @@ public class ToolbarController {
 
         this.toolbarView.getBackgroundColorChooser().addActionListener(e -> {
             drawingContainerView.setCurrentStatus("backgroundColor");
-            selectedColor = JColorChooser.showDialog(null, "Choose a color", selectedColor);
-            drawingContainerView.setCurrentColorBackground(selectedColor);
-            toolbarView.getBackgroundColorChooser().setBackground(selectedColor);
+            selectedColorBackground = JColorChooser.showDialog(null, "Choose a color", selectedColorBackground);
+            drawingContainerView.setCurrentColorBackground(selectedColorBackground);
+            toolbarView.getBackgroundColorChooser().setBackground(selectedColorBackground);
             statusAreaView.editStatus("Background Color");
         });
 
         this.toolbarView.getForegroundColorChooser().addActionListener(e -> {
             drawingContainerView.setCurrentStatus("foregroundColor");
-            selectedColor = JColorChooser.showDialog(null, "Choose a color", selectedColor);
-            drawingContainerView.setCurrentColorForeground(selectedColor);
-            toolbarView.getForegroundColorChooser().setForeground(selectedColor);
+            selectedColorForeground = JColorChooser.showDialog(null, "Choose a color", selectedColorForeground);
+            drawingContainerView.setCurrentColorForeground(selectedColorForeground);
+            toolbarView.getForegroundColorChooser().setBackground(selectedColorForeground);
             statusAreaView.editStatus("Foreground Color");
         });
     }
 
-    public Color getSelectedColor() {
-        return selectedColor;
+    public Color getSelectedColorForeground() {
+        return selectedColorForeground;
+    }
+
+    public Color getSelectedColorBackground() {
+        return selectedColorBackground;
     }
 }
