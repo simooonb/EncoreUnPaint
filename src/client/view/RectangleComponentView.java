@@ -17,7 +17,6 @@ public class RectangleComponentView extends DrawingComponentView {
 
     @Override
     public void update() {
-        System.out.println("rectangle update");
         super.update();
         repaint();
         revalidate();
@@ -28,11 +27,10 @@ public class RectangleComponentView extends DrawingComponentView {
         super.paintComponent(g);
         if(g instanceof Graphics2D){
             Graphics2D g2d = (Graphics2D) g;
-            System.out.println("paintComponent rectangle");
             g2d.setPaint(rectangle.getColor());
             g2d.setStroke(new BasicStroke(1));
             Rectangle boundingBox = rectangle.getBoundingBox();
-            g2d.draw(new Rectangle2D.Float(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height));
+            g2d.draw(new Rectangle2D.Float(0,0, boundingBox.width-1, boundingBox.height-1));
         }
     }
 

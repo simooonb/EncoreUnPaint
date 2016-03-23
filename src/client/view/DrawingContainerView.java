@@ -21,7 +21,7 @@ public class DrawingContainerView extends JPanel{
 
         setLayout(null);
 
-        setBackground(Color.pink);
+        setBackground(Color.white);
         setSize(500,500);
         setBorder(BorderFactory.createLineBorder(Color.black));
     }
