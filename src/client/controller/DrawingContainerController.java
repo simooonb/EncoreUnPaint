@@ -31,7 +31,6 @@ public class DrawingContainerController implements DrawingListener {
 
     private void refreshViews() {
         drawingContainerView.getDrawingComponentViewList().clear();
-        System.out.println("refresh");
         for (DrawingComponent component : drawingContainerView.getDrawing().getDrawingComponents()) {
             DrawingComponentView drawingComponentView;
 
@@ -71,7 +70,6 @@ public class DrawingContainerController implements DrawingListener {
 
     @Override
     public void onDrawingComponentAdded(DrawingComponent drawingComponent) {
-        System.out.println("on drawing component added drawingcontainercontroller");
         updateView();
     }
 
@@ -111,6 +109,21 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "line": {
+                    int width = endingPoint.x - startingPoint.x;
+                    int height = endingPoint.y - startingPoint.y;
+
+                    if(width < 0 ){
+                        int tmp = startingPoint.x;
+                        startingPoint.x = endingPoint.x;
+                        endingPoint.x = tmp;
+                    }
+
+                    if(height < 0){
+                        int tmp = startingPoint.y;
+                        startingPoint.y = endingPoint.y;
+                        endingPoint.y = tmp;
+                    }
+
                     drawingContainerView.getDrawing().addDrawingComponent(new LineComponent(startingPoint,endingPoint));
                     break;
                 }

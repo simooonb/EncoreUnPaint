@@ -19,22 +19,23 @@ public class DrawingContainerView extends JPanel{
     public DrawingContainerView(Drawing drawing) {
         this.drawing = drawing;
 
-        setBackground(Color.white);
-        setSize((int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.75), Toolkit.getDefaultToolkit().getScreenSize().height-155);
+        setLayout(null);
+
+        setBackground(Color.pink);
+        setSize(500,500);
         setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     public void update() {
-        System.out.println("update drawingcontainerview");
         removeAll();
 
         for (DrawingComponentView drawingComponentView : drawingComponentViewList) {
-            drawingComponentView.update();
             add(drawingComponentView);
+            drawingComponentView.update();
         }
 
         revalidate();
-        repaint();
+       repaint();
     }
 
     public void addView(DrawingComponentView drawingComponentView){

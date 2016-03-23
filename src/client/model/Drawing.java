@@ -20,7 +20,6 @@ public class Drawing {
     }
 
     public void addDrawingComponent(DrawingComponent drawingComponent) {
-        System.out.println("add : "+drawingComponent);
         drawingComponents.add(drawingComponent);
         fireDrawingComponentAdded(drawingComponent);
         drawingComponent.addDrawingComponentListener(new DrawingComponentListener() {

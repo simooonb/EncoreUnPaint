@@ -6,7 +6,7 @@ public class RectangleComponent extends DrawingComponent {
     private Rectangle boundingBox;
 
     public RectangleComponent(Rectangle boundingBox) {
-        super(Color.black);
+        super(new Point(boundingBox.x,boundingBox.y),new Dimension(boundingBox.width,boundingBox.height),Color.black);
         this.boundingBox = boundingBox;
     }
 

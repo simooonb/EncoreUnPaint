@@ -28,13 +28,11 @@ public class LineComponentView extends DrawingComponentView {
         super.paintComponent(g);
         if(g instanceof Graphics2D){
             Graphics2D g2d = (Graphics2D) g;
-            System.out.println("lineview paintcomponent");
-            System.out.println("color : "+line.getColor());
-            System.out.println("point 1 :"+line.getFirstPoint()+ " point 2 :"+line.getSecondPoint());
             g2d.setPaint(line.getColor());
-            g2d.setStroke(new BasicStroke(1));
-            g2d.draw(new Line2D.Float(line.getFirstPoint().x, line.getFirstPoint().y, line.getSecondPoint().x, line.getSecondPoint().y));
+            g2d.setStroke(new BasicStroke(2));
+            g2d.draw(new Line2D.Float(0,0,line.getSecondPoint().x-line.getFirstPoint().x,line.getSecondPoint().y-line.getFirstPoint().y));
         }
+        g.dispose();
     }
 
     public LineComponent getLine() {

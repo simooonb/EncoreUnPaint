@@ -10,8 +10,10 @@ abstract public class DrawingComponent {
     private Point position = new Point(0,0);
     private Dimension size = new Dimension(50,50);
 
-    public DrawingComponent(Color color){
-        setColor(color);
+    public DrawingComponent(Point position,Dimension size,Color color){
+       this.position = position;
+        this.size = size;
+        this.color = color;
     }
 
     public void addDrawingComponentListener(DrawingComponentListener listener) {

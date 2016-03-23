@@ -6,7 +6,7 @@ public class LineComponent extends DrawingComponent {
     private Point first, second;
 
     public LineComponent(Point first, Point second) {
-        super(Color.black); // currently black by default, TODO : get the current color chooser
+        super(first,new Dimension(second.x - first.x, second.y - first.y),Color.black); // currently black by default, TODO : get the current color chooser
         this.first = first;
         this.second = second;
     }

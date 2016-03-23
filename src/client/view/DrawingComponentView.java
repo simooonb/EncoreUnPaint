@@ -14,6 +14,7 @@ abstract public class DrawingComponentView extends JPanel {
 
     public DrawingComponentView(DrawingComponent drawingComponent) {
         this.drawingComponent = drawingComponent;
+        setLayout(null);
     }
 
     public void update() {
@@ -30,8 +31,8 @@ abstract public class DrawingComponentView extends JPanel {
 
     public void updateLocation() {
         if (drawingComponent instanceof LineComponent) {
-            setLocation((((LineComponent) drawingComponent).getFirstPoint().x + ((LineComponent) drawingComponent).getSecondPoint().x) / 2,
-                        (((LineComponent) drawingComponent).getFirstPoint().y + ((LineComponent) drawingComponent).getSecondPoint().y) / 2);
+            setLocation( (((LineComponent) drawingComponent).getFirstPoint().x),
+                        (((LineComponent) drawingComponent).getFirstPoint().y));
         } else if (drawingComponent instanceof RectangleComponent) {
             setLocation(((RectangleComponent) drawingComponent).getBoundingBox().getLocation());
         } else if (drawingComponent instanceof OvalComponent) {
