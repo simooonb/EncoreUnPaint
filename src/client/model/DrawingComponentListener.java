@@ -5,4 +5,5 @@ public interface DrawingComponentListener {
     void onRemoved();
     void onColorChanged();
     void onSelected();
+    void onUnselected();
 }

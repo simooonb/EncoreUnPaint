@@ -28,4 +28,10 @@ public class RectangleComponentController extends DrawingComponentController {
         rectangleComponentView.getRectangle().setSelected(true);
         rectangleComponentView.update();
     }
+
+    @Override
+    public void onUnselected(){
+        rectangleComponentView.getRectangle().setSelected(false);
+        rectangleComponentView.update();
+    }
 }

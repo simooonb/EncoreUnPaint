@@ -12,17 +12,20 @@ public class LineComponentController extends DrawingComponentController {
     }
 
     @Override
-    public void onRemoved() {
-
-    }
+    public void onRemoved() { }
 
     @Override
-    public void onColorChanged() {
-
-    }
+    public void onColorChanged() {}
 
     @Override
     public void onSelected() {
+        lineComponentView.getDrawingComponent().setSelected(true);
+        lineComponentView.update();
+    }
 
+    @Override
+    public void onUnselected(){
+        lineComponentView.getDrawingComponent().setSelected(false);
+        lineComponentView.update();
     }
 }

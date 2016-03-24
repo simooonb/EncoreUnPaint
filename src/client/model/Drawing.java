@@ -43,8 +43,10 @@ public class Drawing {
             }
 
             @Override
-            public void onSelected(){
-            }
+            public void onSelected(){}
+
+            @Override
+            public void onUnselected(){}
         });
     }
 
@@ -56,7 +58,7 @@ public class Drawing {
         drawingListeners.remove(drawingListener);
     }
 
-    public void fireDrawingComponentAdded(DrawingComponent drawingComponent) {
+    private void fireDrawingComponentAdded(DrawingComponent drawingComponent) {
         for (DrawingListener listener : drawingListeners) {
             listener.onDrawingComponentAdded(drawingComponent);
         }

@@ -28,7 +28,13 @@ public class LineComponentView extends DrawingComponentView {
         if(g instanceof Graphics2D){
             Graphics2D g2d = (Graphics2D) g;
             g2d.setPaint(line.getBackgroundColor());
-            g2d.setStroke(new BasicStroke(1));
+            if(line.isSelected()){
+                g2d.setStroke(new BasicStroke(3));
+            }
+            else
+            {
+                g2d.setStroke(new BasicStroke(1));
+            }
             g2d.draw(new Line2D.Float(0,0,line.getSecondPoint().x-line.getFirstPoint().x,line.getSecondPoint().y-line.getFirstPoint().y));
         }
         g.dispose();

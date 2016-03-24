@@ -52,6 +52,12 @@ abstract public class DrawingComponent {
         }
     }
 
+    public void fireUnselected() {
+        for (DrawingComponentListener listener : drawingComponentListeners){
+            listener.onUnselected();
+        }
+    }
+
     public boolean isSelected() {
         return isSelected;
     }
