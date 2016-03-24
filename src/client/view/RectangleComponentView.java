@@ -26,12 +26,18 @@ public class RectangleComponentView extends DrawingComponentView {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if(g instanceof Graphics2D){
+            System.out.println("rect view");
             Graphics2D g2d = (Graphics2D) g;
             g2d.setPaint(rectangle.getBackgroundColor());
-            g2d.setStroke(new BasicStroke(1));
+            if(rectangle.isSelected()){
+                System.out.println("rectangle selected");
+                g2d.setStroke(new BasicStroke(2));
+            } else {
+                g2d.setStroke(new BasicStroke(1));
+            }
             Rectangle boundingBox = rectangle.getBoundingBox();
             g2d.fill(new Rectangle2D.Float(0,0, boundingBox.width-1, boundingBox.height-1));
-            g2d.setPaint(rectangle.getForeGroundColor());
+            g2d.setPaint(rectangle.getForegroundColor());
             g2d.draw(new Rectangle2D.Float(0,0,boundingBox.width-2, boundingBox.height-2));
         }
     }

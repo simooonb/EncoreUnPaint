@@ -18,6 +18,13 @@ public class RectangleComponentController extends DrawingComponentController {
 
     @Override
     public void onColorChanged() {
+        rectangleComponentView.setBackground(rectangleComponentView.getDrawingComponent().getDrawing().getBackgroundColor());
+        System.out.println(rectangleComponentView.getBackground());
+        rectangleComponentView.update();
+    }
+
+    @Override
+    public void onSelected() {
 
     }
 }

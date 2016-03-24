@@ -9,8 +9,7 @@ import java.awt.event.MouseEvent;
 
 public class DrawingContainerController implements DrawingListener {
     private DrawingContainerView drawingContainerView;
-    private Point startingPoint = null;
-    private Point endingPoint = null;
+    private Point startingPoint = null, endingPoint = null, clickingPoint = null;
 
     public DrawingContainerController(DrawingContainerView drawingContainerView) {
         this.drawingContainerView = drawingContainerView;
@@ -64,6 +63,11 @@ public class DrawingContainerController implements DrawingListener {
                 public void onColorChanged() {
                     updateView();
                 }
+
+                @Override
+                public void onSelected() {
+
+                }
             });
         }
     }
@@ -84,12 +88,27 @@ public class DrawingContainerController implements DrawingListener {
             String currentStatus = drawingContainerView.getCurrentStatus();
             if(currentStatus.equals("none"))
                 return;
-            if (currentStatus.equals("line") || currentStatus.equals("rectangle") || currentStatus.equals("oval"))  {
-                // when the user click, we memorize the starting coordonates
-                startingPoint = me.getPoint();
-            }
-            else { // fill or selection
 
+            switch (currentStatus) {
+                case "line":
+                case "rectangle":
+                case "oval":
+                    // when the user click, we memorize the starting coordonates
+                    startingPoint = me.getPoint();
+                    break;
+                case "fill":  // fill or selection
+                    drawingContainerView.getDrawingComponentViewList().stream().filter(component -> component instanceof RectangleComponentView && component.getBounds().contains(me.getPoint())).forEach(component -> {
+                        component.getDrawingComponent().fireColorChanged();
+                    });
+                    break;
+                case "selection":
+                    clickingPoint = me.getPoint();
+                    DrawingComponentView drawingComponentView = drawingContainerView.clickingPointInContainerView(clickingPoint);
+                    if (drawingComponentView != null) {
+                        System.out.println("clicked on component");
+                        drawingComponentView.getDrawingComponent().setSelected(true);
+                    }
+                    break;
             }
 
         }
@@ -140,7 +159,6 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 default : {
-                    return;
                 }
             }
         }

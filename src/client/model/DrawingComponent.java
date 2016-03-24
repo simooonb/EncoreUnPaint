@@ -6,16 +6,18 @@ import java.util.List;
 
 abstract public class DrawingComponent {
     private Color backgroundColor;
-    private Color foreGroundColor;
+    private Color foregroundColor;
     private List<DrawingComponentListener> drawingComponentListeners = new ArrayList<>();
     private Point position = new Point(0,0);
     private Dimension size = new Dimension(50,50);
+    private Drawing drawing;
+    private boolean isSelected = false;
 
-    public DrawingComponent(Point position,Dimension size,Color backgroundColor, Color foreGroundColor){
+    public DrawingComponent(Point position,Dimension size,Color backgroundColor, Color foregroundColor){
        this.position = position;
         this.size = size;
         this.backgroundColor = backgroundColor;
-        this.foreGroundColor = foreGroundColor;
+        this.foregroundColor = foregroundColor;
     }
 
     public void addDrawingComponentListener(DrawingComponentListener listener) {
@@ -44,6 +46,21 @@ abstract public class DrawingComponent {
         }
     }
 
+    public void fireSelected() {
+        for (DrawingComponentListener listener : drawingComponentListeners){
+            listener.onSelected();
+        }
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        System.out.println("selected");
+        isSelected = selected;
+    }
+
     public void remove() {
         fireRemoved();
     }
@@ -68,7 +85,25 @@ abstract public class DrawingComponent {
         return backgroundColor;
     }
 
-    public Color getForeGroundColor() {
-        return foreGroundColor;
+    public Color getForegroundColor() {
+        return foregroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        fireColorChanged();
+    }
+
+    public void setForegroundColor(Color foregroundColor) {
+        this.foregroundColor = foregroundColor;
+        fireColorChanged();
+    }
+
+    public Drawing getDrawing() {
+        return drawing;
+    }
+
+    public void setDrawing(Drawing drawing) {
+        this.drawing = drawing;
     }
 }

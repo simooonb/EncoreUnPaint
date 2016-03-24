@@ -40,6 +40,10 @@ abstract public class DrawingComponentView extends JPanel {
         }
     }
 
+    public void updateSelection(boolean isSelected){
+        drawingComponent.setSelected(isSelected);
+    }
+
     public DrawingComponent getDrawingComponent() {
         return drawingComponent;
     }

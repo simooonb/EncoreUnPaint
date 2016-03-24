@@ -4,8 +4,7 @@ import client.model.Drawing;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +12,6 @@ public class DrawingContainerView extends JPanel{
     private String currentStatus = "none";
     private List<DrawingComponentView> drawingComponentViewList = new ArrayList<>();
     private Drawing drawing;
-    private Color currentColorForeground = Color.BLACK;
-    private Color currentColorBackground = Color.BLACK;
 
     public DrawingContainerView(Drawing drawing) {
         this.drawing = drawing;
@@ -35,7 +32,32 @@ public class DrawingContainerView extends JPanel{
         }
 
         revalidate();
-       repaint();
+        repaint();
+    }
+
+    public DrawingComponentView clickingPointInContainerView(Point clickingPoint){
+        for(DrawingComponentView drawingComponentView : drawingComponentViewList){
+            if(drawingComponentView instanceof RectangleComponentView ){
+                RectangleComponentView rectangleView = (RectangleComponentView) drawingComponentView;
+                if(rectangleView.getBounds().contains(clickingPoint)){
+                    return drawingComponentView;
+                }
+            }
+            else if(drawingComponentView instanceof OvalComponentView){
+                OvalComponentView ovalView = (OvalComponentView) drawingComponentView;
+                if (ovalView.getBounds().contains(clickingPoint)) {
+                    return drawingComponentView;
+                }
+            }
+            else{
+                LineComponentView lineView = (LineComponentView) drawingComponentView;
+                double dist = Line2D.ptSegDist(lineView.getLine().getFirstPoint().x,lineView.getLine().getFirstPoint().y,lineView.getLine().getSecondPoint().x,lineView.getLine().getSecondPoint().y,clickingPoint.x,clickingPoint.y);
+                if(dist <= 2){
+                    return drawingComponentView;
+                }
+            }
+        }
+        return null;
     }
 
     public void addView(DrawingComponentView drawingComponentView){
@@ -52,18 +74,18 @@ public class DrawingContainerView extends JPanel{
 
 
     public Color getCurrentColorForeground() {
-        return currentColorForeground;
+        return drawing.getForegroundColor();
     }
 
     public void setCurrentColorForeground(Color currentColorForeground) {
-        this.currentColorForeground = currentColorForeground;
+        drawing.setForegroundColor(currentColorForeground);
     }
 
     public Color getCurrentColorBackground() {
-        return currentColorBackground;
+        return drawing.getBackgroundColor();
     }
 
     public void setCurrentColorBackground(Color currentColorBackground) {
-        this.currentColorBackground = currentColorBackground;
+        drawing.setBackgroundColor(currentColorBackground);
     }
 }

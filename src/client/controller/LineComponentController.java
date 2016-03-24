@@ -20,4 +20,9 @@ public class LineComponentController extends DrawingComponentController {
     public void onColorChanged() {
 
     }
+
+    @Override
+    public void onSelected() {
+
+    }
 }

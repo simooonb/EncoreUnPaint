@@ -8,8 +8,6 @@ abstract public class DrawingComponentController implements DrawingComponentList
 
     public DrawingComponentController(DrawingComponentView drawingComponentView) {
         this.drawingComponentView = drawingComponentView;
-        /*System.out.println(drawingComponentView);
-        System.out.println(drawingComponentView.getDrawingComponent());*/
         drawingComponentView.getDrawingComponent().addDrawingComponentListener(this);
     }
 

@@ -1,11 +1,14 @@
 package client.model;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Drawing {
     private List<DrawingComponent> drawingComponents = new ArrayList<>();
     private List<DrawingListener> drawingListeners = new ArrayList<>();
+    private Color foregroundColor = Color.black;
+    private Color backgroundColor = Color.black;
 
     public Drawing() {
 
@@ -21,6 +24,7 @@ public class Drawing {
 
     public void addDrawingComponent(DrawingComponent drawingComponent) {
         drawingComponents.add(drawingComponent);
+        drawingComponent.setDrawing(this);
         fireDrawingComponentAdded(drawingComponent);
         drawingComponent.addDrawingComponentListener(new DrawingComponentListener() {
             @Override
@@ -36,6 +40,10 @@ public class Drawing {
             @Override
             public void onColorChanged() {
 
+            }
+
+            @Override
+            public void onSelected(){
             }
         });
     }
@@ -58,5 +66,21 @@ public class Drawing {
         for (DrawingListener listener : drawingListeners) {
             listener.onDrawingComponentRemoved(drawingComponent);
         }
+    }
+
+    public Color getForegroundColor() {
+        return foregroundColor;
+    }
+
+    public void setForegroundColor(Color foregroundColor) {
+        this.foregroundColor = foregroundColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 }

@@ -20,4 +20,9 @@ public class OvalComponentController extends DrawingComponentController {
     public void onColorChanged() {
 
     }
+
+    @Override
+    public void onSelected() {
+
+    }
 }
