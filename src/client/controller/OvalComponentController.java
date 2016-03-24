@@ -23,6 +23,7 @@ public class OvalComponentController extends DrawingComponentController {
 
     @Override
     public void onSelected() {
-
+        ovalComponentView.getOval().setSelected(true);
+        ovalComponentView.update();
     }
 }

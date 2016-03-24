@@ -29,10 +29,9 @@ public class OvalComponentView extends DrawingComponentView {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setPaint(oval.getBackgroundColor());
             if (oval.isSelected()) {
-                System.out.println("oval selected");
-                g2d.setStroke(new BasicStroke(2));
+                g2d.setStroke(new BasicStroke(5));
             } else {
-                g2d.setStroke(new BasicStroke(1));
+                g2d.setStroke(new BasicStroke(2));
             }
 
             Rectangle boundingBox = oval.getBoundingBox();
