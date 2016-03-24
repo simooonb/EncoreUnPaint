@@ -57,8 +57,9 @@ abstract public class DrawingComponent {
     }
 
     public void setSelected(boolean selected) {
-        System.out.println("selected");
+        System.out.println("selected set");
         isSelected = selected;
+
     }
 
     public void remove() {

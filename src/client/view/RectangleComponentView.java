@@ -31,9 +31,9 @@ public class RectangleComponentView extends DrawingComponentView {
             g2d.setPaint(rectangle.getBackgroundColor());
             if(rectangle.isSelected()){
                 System.out.println("rectangle selected");
-                g2d.setStroke(new BasicStroke(2));
+                g2d.setStroke(new BasicStroke(10));
             } else {
-                g2d.setStroke(new BasicStroke(1));
+                g2d.setStroke(new BasicStroke(3));
             }
             Rectangle boundingBox = rectangle.getBoundingBox();
             g2d.fill(new Rectangle2D.Float(0,0, boundingBox.width-1, boundingBox.height-1));

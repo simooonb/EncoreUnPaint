@@ -106,7 +106,7 @@ public class DrawingContainerController implements DrawingListener {
                     DrawingComponentView drawingComponentView = drawingContainerView.clickingPointInContainerView(clickingPoint);
                     if (drawingComponentView != null) {
                         System.out.println("clicked on component");
-                        drawingComponentView.getDrawingComponent().setSelected(true);
+                        drawingComponentView.getDrawingComponent().fireSelected();
                     }
                     break;
             }
