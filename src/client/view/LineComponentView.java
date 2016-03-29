@@ -11,7 +11,7 @@ public class LineComponentView extends DrawingComponentView {
     public LineComponentView(LineComponent line) {
         super(line);
         this.line = line;
-        setOpaque(true);
+        setOpaque(false);
         update();
     }
 
@@ -35,7 +35,27 @@ public class LineComponentView extends DrawingComponentView {
             {
                 g2d.setStroke(new BasicStroke(1));
             }
-            g2d.draw(new Line2D.Float(0,0,line.getSecondPoint().x-line.getFirstPoint().x,line.getSecondPoint().y-line.getFirstPoint().y));
+            Point startingPoint = null;
+            Point endingPoint = null;
+            if(line.isInvertHeight() && line.isInvertWidth()){
+                startingPoint = new Point(line.getSize().width,line.getSize().height);
+                endingPoint = new Point(0,0);
+            }
+            else if(line.isInvertHeight()){
+                startingPoint = new Point(0,line.getSize().height);
+                endingPoint = new Point(line.getSize().width,0);
+            }
+            else if(line.isInvertWidth())
+            {
+                startingPoint = new Point(line.getSize().width, 0);
+                endingPoint = new Point(0,line.getSize().height);
+            }
+            else
+            {
+                startingPoint = new Point(0,0);
+                endingPoint = new Point(line.getSize().width,line.getSize().height);
+            }
+            g2d.draw(new Line2D.Float(startingPoint.x,startingPoint.y, endingPoint.x,endingPoint.y ));
         }
         g.dispose();
     }
@@ -44,7 +64,4 @@ public class LineComponentView extends DrawingComponentView {
         return line;
     }
 
-    public void setLine(LineComponent line) {
-        this.line = line;
-    }
 }

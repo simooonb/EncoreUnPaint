@@ -12,7 +12,7 @@ public class DrawingContainerController implements DrawingListener {
     private DrawingContainerView drawingContainerView;
     private Point startingPoint = null, endingPoint = null, clickingPoint = null;
     private DrawingComponent currentDrawingComponentSelected = null;
-    private boolean invert = false;
+    private boolean invertWidth = false, invertHeight = false;
 
     public DrawingContainerController(DrawingContainerView drawingContainerView) {
         this.drawingContainerView = drawingContainerView;
@@ -104,7 +104,7 @@ public class DrawingContainerController implements DrawingListener {
                     // when the user click, we memorize the starting coordonates
                     startingPoint = me.getPoint();
                     break;
-                case "fill":  // fill or selection
+                case "fill":
                     /*drawingContainerView.getDrawingComponentViewList().stream().filter(component -> component instanceof RectangleComponentView && component.getBounds().contains(me.getPoint())).forEach(component -> {
                         component.getDrawingComponent().fireColorChanged();
                     });*/
@@ -113,7 +113,6 @@ public class DrawingContainerController implements DrawingListener {
                     clickingPoint = me.getPoint();
                     DrawingComponentView drawingComponentViewSelected = drawingContainerView.clickingPointInContainerView(clickingPoint);
                     if (drawingComponentViewSelected != null) {
-                        System.out.println("clicked on component");
                         currentDrawingComponentSelected = drawingComponentViewSelected.getDrawingComponent();
                         currentDrawingComponentSelected.fireSelected();
                     }
@@ -125,8 +124,6 @@ public class DrawingContainerController implements DrawingListener {
         @Override
         public void mouseReleased(MouseEvent me){
             endingPoint = me.getPoint();
-            System.out.println("start : "+startingPoint);
-            System.out.println("end : "+endingPoint);
             switch (drawingContainerView.getCurrentStatus()) {
                 case "selection": {
 
@@ -139,8 +136,8 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "line": {
-                    checkCoordonates();
-                    LineComponent newLineComponent = new LineComponent(startingPoint,endingPoint,drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
+                    checkLinesCoordonates();
+                    LineComponent newLineComponent = new LineComponent(startingPoint,endingPoint,invertWidth,invertHeight,drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
                     newLineComponent.setSelected(true);
                     currentDrawingComponentSelected = newLineComponent;
                     drawingContainerView.getDrawing().addDrawingComponent(newLineComponent);
@@ -148,8 +145,8 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "rectangle": {
-                    Dimension dimRectangle = new Dimension(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
-                    RectangleComponent newRectangleComponent = new RectangleComponent(new Rectangle(startingPoint,dimRectangle),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
+                    Dimension dimRectangle = new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y));
+                    RectangleComponent newRectangleComponent = new RectangleComponent(new Rectangle(checkRectangleAndOvalCoordonates(),dimRectangle),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
                     newRectangleComponent.setSelected(true);
                     currentDrawingComponentSelected = newRectangleComponent;
                     drawingContainerView.getDrawing().addDrawingComponent(newRectangleComponent);
@@ -157,8 +154,8 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "oval": {
-                    Dimension dimOval = new Dimension(endingPoint.x - startingPoint.x, endingPoint.y - startingPoint.y);
-                    OvalComponent newOvalComponent = new OvalComponent(new Rectangle(startingPoint,dimOval),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
+                    Dimension dimOval = new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y));
+                    OvalComponent newOvalComponent = new OvalComponent(new Rectangle(checkRectangleAndOvalCoordonates(),dimOval),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
                     newOvalComponent.setSelected(true);
                     currentDrawingComponentSelected = newOvalComponent;
                     drawingContainerView.getDrawing().addDrawingComponent(newOvalComponent);
@@ -167,31 +164,40 @@ public class DrawingContainerController implements DrawingListener {
             }
         }
 
-        private void checkCoordonates(){
+        private void checkLinesCoordonates(){
             int width = endingPoint.x - startingPoint.x;
             int height = endingPoint.y - startingPoint.y;
-            if(width < 0 && height < 0 ){
-                swapX();
-                swapY();
-                invert = false;
-                return;
+
+            invertHeight = false;
+            invertWidth = false;
+
+            if(width < 0){
+                invertWidth = true;
+            }
+            if(height < 0){
+                invertHeight = true;
             }
 
             return;
 
-
         }
 
-        private void swapX(){
-            int tmp = startingPoint.x;
-            startingPoint.x = endingPoint.x;
-            endingPoint.x = tmp;
-        }
-
-        private void swapY(){
-            int tmp = startingPoint.y;
-            startingPoint.y = endingPoint.y;
-            endingPoint.y = tmp;
+        private Point checkRectangleAndOvalCoordonates(){
+            int width = endingPoint.x - startingPoint.x;
+            int height = endingPoint.y - startingPoint.y;
+            if(width < 0 && height < 0){
+                return endingPoint;
+            }
+            else if(width < 0){
+                return new Point(endingPoint.x,startingPoint.y);
+            }
+            else if(height < 0){
+                return new Point(startingPoint.x,endingPoint.y);
+            }
+            else
+            {
+                return startingPoint;
+            }
         }
     }
 }

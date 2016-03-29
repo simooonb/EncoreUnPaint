@@ -26,11 +26,9 @@ public class RectangleComponentView extends DrawingComponentView {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if(g instanceof Graphics2D){
-            System.out.println("rect view");
             Graphics2D g2d = (Graphics2D) g;
             g2d.setPaint(rectangle.getBackgroundColor());
             if(rectangle.isSelected()){
-                System.out.println("rectangle selected");
                 g2d.setStroke(new BasicStroke(10));
             } else {
                 g2d.setStroke(new BasicStroke(3));
