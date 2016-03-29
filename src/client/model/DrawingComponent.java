@@ -13,11 +13,15 @@ abstract public class DrawingComponent {
     private Drawing drawing;
     private boolean isSelected = false;
 
-    public DrawingComponent(Point position,Dimension size,Color backgroundColor, Color foregroundColor){
-       this.position = position;
+    public DrawingComponent(Point point,Dimension size,Color backgroundColor, Color foregroundColor){
         this.size = size;
+        this.position = point;
         this.backgroundColor = backgroundColor;
         this.foregroundColor = foregroundColor;
+    }
+
+    public DrawingComponent(Dimension size,Color backgroundColor, Color foregroundColor){
+        this(new Point(0,0),size,backgroundColor,foregroundColor);
     }
 
     public void addDrawingComponentListener(DrawingComponentListener listener) {

@@ -12,6 +12,7 @@ public class DrawingContainerController implements DrawingListener {
     private DrawingContainerView drawingContainerView;
     private Point startingPoint = null, endingPoint = null, clickingPoint = null;
     private DrawingComponent currentDrawingComponentSelected = null;
+    private boolean invert = false;
 
     public DrawingContainerController(DrawingContainerView drawingContainerView) {
         this.drawingContainerView = drawingContainerView;
@@ -124,6 +125,8 @@ public class DrawingContainerController implements DrawingListener {
         @Override
         public void mouseReleased(MouseEvent me){
             endingPoint = me.getPoint();
+            System.out.println("start : "+startingPoint);
+            System.out.println("end : "+endingPoint);
             switch (drawingContainerView.getCurrentStatus()) {
                 case "selection": {
 
@@ -136,20 +139,7 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "line": {
-                    int width = endingPoint.x - startingPoint.x;
-                    int height = endingPoint.y - startingPoint.y;
-
-                    if(width < 0 ){
-                        int tmp = startingPoint.x;
-                        startingPoint.x = endingPoint.x;
-                        endingPoint.x = tmp;
-                    }
-
-                    if(height < 0){
-                        int tmp = startingPoint.y;
-                        startingPoint.y = endingPoint.y;
-                        endingPoint.y = tmp;
-                    }
+                    checkCoordonates();
                     LineComponent newLineComponent = new LineComponent(startingPoint,endingPoint,drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
                     newLineComponent.setSelected(true);
                     currentDrawingComponentSelected = newLineComponent;
@@ -178,6 +168,33 @@ public class DrawingContainerController implements DrawingListener {
                 default : {
                 }
             }
+        }
+
+        private void checkCoordonates(){
+            int width = endingPoint.x - startingPoint.x;
+            int height = endingPoint.y - startingPoint.y;
+            if(width < 0 && height < 0 ){
+                swapX();
+                swapY();
+                invert = false;
+                return;
+            }
+
+            return;
+
+
+        }
+
+        private void swapX(){
+            int tmp = startingPoint.x;
+            startingPoint.x = endingPoint.x;
+            endingPoint.x = tmp;
+        }
+
+        private void swapY(){
+            int tmp = startingPoint.y;
+            startingPoint.y = endingPoint.y;
+            endingPoint.y = tmp;
         }
     }
 }
