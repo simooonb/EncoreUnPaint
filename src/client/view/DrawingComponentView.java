@@ -19,7 +19,7 @@ abstract public class DrawingComponentView extends JPanel {
 
     public void update() {
         updateSize();
-        updateLocation();
+        //updateLocation();
     }
 
     private void updateSize() {
@@ -30,6 +30,9 @@ abstract public class DrawingComponentView extends JPanel {
     }
 
     public void updateLocation() {
+        if (drawingComponent.getPosition() == null)
+            return;
+
         if (drawingComponent instanceof LineComponent) {
             setLocation( (((LineComponent) drawingComponent).getFirstPoint().x),
                         (((LineComponent) drawingComponent).getFirstPoint().y));

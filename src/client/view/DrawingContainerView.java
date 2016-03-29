@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DrawingContainerView extends JPanel{
-    private String currentStatus = "none";
     private List<DrawingComponentView> drawingComponentViewList = new ArrayList<>();
     private Drawing drawing;
 
@@ -68,9 +67,9 @@ public class DrawingContainerView extends JPanel{
 
     public Drawing getDrawing() { return drawing; }
 
-    public String getCurrentStatus() { return currentStatus; }
+    public String getCurrentStatus() { return drawing.getCurrentStatus(); }
 
-    public void setCurrentStatus(String currentStatus) { this.currentStatus = currentStatus; }
+    public void setCurrentStatus(String currentStatus) { drawing.setCurrentStatus(currentStatus); }
 
 
     public Color getCurrentColorForeground() {
