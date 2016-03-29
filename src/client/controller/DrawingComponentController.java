@@ -1,5 +1,6 @@
 package client.controller;
 
+import client.model.DrawingComponent;
 import client.model.DrawingComponentListener;
 import client.model.MoveComponentAction;
 import client.view.DrawingComponentView;
@@ -67,6 +68,12 @@ abstract public class DrawingComponentController implements DrawingComponentList
         @Override
         public void mousePressed(MouseEvent e) {
             dragging = true;
+            if (!"selection".equals(drawingComponentView.getDrawingComponent().getDrawing().getCurrentStatus()))
+                return;
+
+            unselectAllOthers();
+            drawingComponentView.getDrawingComponent().getDrawing().setCurrentComponentSelected(drawingComponentView.getDrawingComponent());
+            drawingComponentView.getDrawingComponent().fireSelected();
         }
 
         @Override
@@ -79,6 +86,14 @@ abstract public class DrawingComponentController implements DrawingComponentList
             if (Objects.equals(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR), drawingComponentView.getCursor())) {
                 MoveComponentAction moveComponentAction = new MoveComponentAction(drawingComponentView, position);
                 drawingComponentView.getDrawingComponent().getDrawing().getActionStack().push(moveComponentAction);
+            }
+        }
+
+        private void unselectAllOthers(){
+            for(DrawingComponent drawingComponent : drawingComponentView.getDrawingComponent().getDrawing().getDrawingComponents()){
+                if(drawingComponent != drawingComponentView.getDrawingComponent()){
+                    drawingComponent.fireUnselected();
+                }
             }
         }
     }

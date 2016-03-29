@@ -64,6 +64,7 @@ public class DrawingContainerController implements DrawingListener {
 
                 @Override
                 public void onColorChanged() {
+                    System.out.println("hello");
                     updateView();
                 }
 
@@ -89,9 +90,9 @@ public class DrawingContainerController implements DrawingListener {
     class DrawingContainerListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent me) {
-            if(currentDrawingComponentSelected != null) {
-                currentDrawingComponentSelected.fireUnselected();
-                currentDrawingComponentSelected = null;
+            if(drawingContainerView.getDrawing().getCurrentComponentSelected() != null) {
+                drawingContainerView.getDrawing().getCurrentComponentSelected().fireUnselected();
+                drawingContainerView.getDrawing().setCurrentComponentSelected(null);
             }
             String currentStatus = drawingContainerView.getCurrentStatus();
             if(currentStatus.equals("none"))
@@ -105,17 +106,9 @@ public class DrawingContainerController implements DrawingListener {
                     startingPoint = me.getPoint();
                     break;
                 case "fill":
-                    /*drawingContainerView.getDrawingComponentViewList().stream().filter(component -> component instanceof RectangleComponentView && component.getBounds().contains(me.getPoint())).forEach(component -> {
-                        component.getDrawingComponent().fireColorChanged();
-                    });*/
                     break;
                 case "selection":
                     clickingPoint = me.getPoint();
-                    DrawingComponentView drawingComponentViewSelected = drawingContainerView.clickingPointInContainerView(clickingPoint);
-                    if (drawingComponentViewSelected != null) {
-                        currentDrawingComponentSelected = drawingComponentViewSelected.getDrawingComponent();
-                        currentDrawingComponentSelected.fireSelected();
-                    }
                     break;
             }
 
@@ -126,12 +119,10 @@ public class DrawingContainerController implements DrawingListener {
             endingPoint = me.getPoint();
             switch (drawingContainerView.getCurrentStatus()) {
                 case "selection": {
-
                     break;
                 }
 
                 case "fill": {
-
                     break;
                 }
 
@@ -140,6 +131,7 @@ public class DrawingContainerController implements DrawingListener {
                     LineComponent newLineComponent = new LineComponent(startingPoint,endingPoint,invertWidth,invertHeight,drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
                     newLineComponent.setSelected(true);
                     currentDrawingComponentSelected = newLineComponent;
+                    drawingContainerView.getDrawing().setCurrentComponentSelected(currentDrawingComponentSelected);
                     drawingContainerView.getDrawing().addDrawingComponent(newLineComponent);
                     break;
                 }
@@ -149,6 +141,7 @@ public class DrawingContainerController implements DrawingListener {
                     RectangleComponent newRectangleComponent = new RectangleComponent(new Rectangle(checkRectangleAndOvalCoordonates(),dimRectangle),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
                     newRectangleComponent.setSelected(true);
                     currentDrawingComponentSelected = newRectangleComponent;
+                    drawingContainerView.getDrawing().setCurrentComponentSelected(currentDrawingComponentSelected);
                     drawingContainerView.getDrawing().addDrawingComponent(newRectangleComponent);
                     break;
                 }
@@ -158,6 +151,7 @@ public class DrawingContainerController implements DrawingListener {
                     OvalComponent newOvalComponent = new OvalComponent(new Rectangle(checkRectangleAndOvalCoordonates(),dimOval),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
                     newOvalComponent.setSelected(true);
                     currentDrawingComponentSelected = newOvalComponent;
+                    drawingContainerView.getDrawing().setCurrentComponentSelected(currentDrawingComponentSelected);
                     drawingContainerView.getDrawing().addDrawingComponent(newOvalComponent);
                     break;
                 }

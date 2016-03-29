@@ -104,12 +104,10 @@ abstract public class DrawingComponent {
 
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
-        fireColorChanged();
     }
 
     public void setForegroundColor(Color foregroundColor) {
         this.foregroundColor = foregroundColor;
-        fireColorChanged();
     }
 
     public Drawing getDrawing() {

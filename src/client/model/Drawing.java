@@ -11,13 +11,10 @@ public class Drawing {
     private String currentStatus = "none";
     private Color foregroundColor = Color.black;
     private Color backgroundColor = Color.black;
+    private DrawingComponent currentComponentSelected = null;
 
     public Drawing() {
 
-    }
-
-    public List<DrawingComponent> getDrawingComponents() {
-        return drawingComponents;
     }
 
     public DrawingComponent getDrawingComponent(int id) {
@@ -72,12 +69,21 @@ public class Drawing {
         }
     }
 
+    public List<DrawingComponent> getDrawingComponents() {
+        return drawingComponents;
+    }
+
+
     public Color getForegroundColor() {
         return foregroundColor;
     }
 
     public void setForegroundColor(Color foregroundColor) {
         this.foregroundColor = foregroundColor;
+        if(currentComponentSelected != null){
+            currentComponentSelected.setForegroundColor(foregroundColor);
+            currentComponentSelected.fireColorChanged();
+        }
     }
 
     public Color getBackgroundColor() {
@@ -86,7 +92,13 @@ public class Drawing {
 
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
+        if(currentComponentSelected != null){
+            currentComponentSelected.setBackgroundColor(backgroundColor);
+            currentComponentSelected.fireColorChanged();
+        }
     }
+
+
 
     public ActionStack getActionStack() {
         return actionStack;
@@ -98,5 +110,13 @@ public class Drawing {
 
     public void setCurrentStatus(String currentStatus) {
         this.currentStatus = currentStatus;
+    }
+
+    public DrawingComponent getCurrentComponentSelected() {
+        return currentComponentSelected;
+    }
+
+    public void setCurrentComponentSelected(DrawingComponent currentComponentSelected) {
+        this.currentComponentSelected = currentComponentSelected;
     }
 }

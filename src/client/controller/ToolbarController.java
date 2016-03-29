@@ -1,5 +1,9 @@
 package client.controller;
 
+import client.model.DrawingComponent;
+import client.model.DrawingComponentListener;
+import client.model.DrawingListener;
+import client.view.DrawingComponentView;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
 import client.view.ToolbarView;
@@ -7,7 +11,7 @@ import client.view.ToolbarView;
 import javax.swing.*;
 import java.awt.*;
 
-public class ToolbarController {
+public class ToolbarController implements DrawingComponentListener,DrawingListener{
     private ToolbarView toolbarView;
     private StatusAreaView statusAreaView;
     private DrawingContainerView drawingContainerView;
@@ -19,6 +23,8 @@ public class ToolbarController {
         this.toolbarView = toolbarView;
         this.statusAreaView = statusAreaView;
         this.drawingContainerView = drawingContainerView;
+        drawingContainerView.getDrawing().addDrawingListener(this);
+
         this.toolbarView.getSelectForm().addActionListener(e -> {
             drawingContainerView.setCurrentStatus("selection");
             statusAreaView.editStatus("Selection form");
@@ -60,12 +66,42 @@ public class ToolbarController {
             statusAreaView.editStatus("Foreground Color");
         });
     }
-
-    public Color getSelectedColorForeground() {
-        return selectedColorForeground;
+    @Override
+    public void onDrawingComponentAdded(DrawingComponent drawingComponent){
+        drawingComponent.addDrawingComponentListener(this);
     }
 
-    public Color getSelectedColorBackground() {
-        return selectedColorBackground;
+    @Override
+    public void onDrawingComponentRemoved(DrawingComponent drawingComponent){
+        drawingComponent.removeDrawingComponentListener(this);
     }
+
+    @Override
+    public void onMoved(){
+
+    }
+
+    @Override
+    public void onRemoved(){
+
+    }
+
+    @Override
+    public void onColorChanged(){
+
+    }
+
+    @Override
+    public void onSelected(){
+        toolbarView.getForegroundColorChooser().setBackground(drawingContainerView.getDrawing().getCurrentComponentSelected().getForegroundColor());
+        toolbarView.getBackgroundColorChooser().setBackground(drawingContainerView.getDrawing().getCurrentComponentSelected().getBackgroundColor());
+        selectedColorForeground = drawingContainerView.getDrawing().getCurrentComponentSelected().getForegroundColor();
+        selectedColorBackground = drawingContainerView.getDrawing().getCurrentComponentSelected().getBackgroundColor();
+    }
+
+    @Override
+    public void onUnselected(){
+
+    }
+
 }
