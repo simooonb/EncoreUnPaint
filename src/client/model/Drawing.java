@@ -7,6 +7,8 @@ import java.util.List;
 public class Drawing {
     private List<DrawingComponent> drawingComponents = new ArrayList<>();
     private List<DrawingListener> drawingListeners = new ArrayList<>();
+    private ActionStack actionStack = new ActionStack();
+    private String currentStatus = "none";
     private Color foregroundColor = Color.black;
     private Color backgroundColor = Color.black;
 
@@ -84,5 +86,17 @@ public class Drawing {
 
     public void setBackgroundColor(Color backgroundColor) {
         this.backgroundColor = backgroundColor;
+    }
+
+    public ActionStack getActionStack() {
+        return actionStack;
+    }
+
+    public String getCurrentStatus() {
+        return currentStatus;
+    }
+
+    public void setCurrentStatus(String currentStatus) {
+        this.currentStatus = currentStatus;
     }
 }

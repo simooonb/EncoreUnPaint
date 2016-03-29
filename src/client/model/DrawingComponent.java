@@ -64,7 +64,6 @@ abstract public class DrawingComponent {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
-
     }
 
     public void remove() {
@@ -76,7 +75,11 @@ abstract public class DrawingComponent {
     }
 
     public void setPosition(Point position) {
+        if (this.position == position)
+            return;
+
         this.position = position;
+        fireMoved();
     }
 
     public Dimension getSize() {

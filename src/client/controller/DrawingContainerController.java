@@ -174,9 +174,6 @@ public class DrawingContainerController implements DrawingListener {
                     drawingContainerView.getDrawing().addDrawingComponent(newOvalComponent);
                     break;
                 }
-
-                default : {
-                }
             }
         }
     }
