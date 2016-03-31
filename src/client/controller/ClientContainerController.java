@@ -7,6 +7,7 @@ import client.view.StatusAreaView;
 import client.view.ToolbarView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -63,8 +64,15 @@ public class ClientContainerController {
                 isFullscreen = !isFullscreen;
                 if (isFullscreen) {
                     clientContainerView.getClientFrameView().setExtendedState(JFrame.MAXIMIZED_BOTH);
+                    clientContainerView.getClientFrameView().dispose();
+                    clientContainerView.getClientFrameView().setUndecorated(true);
+                    clientContainerView.getClientFrameView().setVisible(true);
                 } else {
                     clientContainerView.getClientFrameView().setExtendedState(JFrame.NORMAL);
+                    clientContainerView.getClientFrameView().dispose();
+                    clientContainerView.getClientFrameView().setUndecorated(false);
+                    clientContainerView.getClientFrameView().setSize(Toolkit.getDefaultToolkit().getScreenSize().width,(Toolkit.getDefaultToolkit().getScreenSize().height)-50);
+                    clientContainerView.getClientFrameView().setVisible(true);
                 }
             }
         });
