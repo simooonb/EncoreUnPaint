@@ -1,6 +1,10 @@
 package client.view;
 
-import client.model.Drawing;
+import client.model.drawing.Drawing;
+import client.view.drawingComponents.DrawingComponentView;
+import client.view.drawingComponents.LineComponentView;
+import client.view.drawingComponents.OvalComponentView;
+import client.view.drawingComponents.RectangleComponentView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +40,7 @@ public class DrawingContainerView extends JPanel{
 
     public DrawingComponentView clickingPointInContainerView(Point clickingPoint){
         for(DrawingComponentView drawingComponentView : drawingComponentViewList){
-            if(drawingComponentView instanceof RectangleComponentView ){
+            if(drawingComponentView instanceof RectangleComponentView){
                 RectangleComponentView rectangleView = (RectangleComponentView) drawingComponentView;
                 if(rectangleView.getBounds().contains(clickingPoint)){
                     return drawingComponentView;

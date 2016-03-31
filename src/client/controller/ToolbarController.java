@@ -1,9 +1,8 @@
 package client.controller;
 
-import client.model.DrawingComponent;
-import client.model.DrawingComponentListener;
-import client.model.DrawingListener;
-import client.view.DrawingComponentView;
+import client.model.drawingComponents.DrawingComponent;
+import client.model.drawingComponents.DrawingComponentListener;
+import client.model.drawing.DrawingListener;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
 import client.view.ToolbarView;

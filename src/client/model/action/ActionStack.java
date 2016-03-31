@@ -1,4 +1,4 @@
-package client.model;
+package client.model.action;
 
 import java.util.Objects;
 import java.util.Stack;

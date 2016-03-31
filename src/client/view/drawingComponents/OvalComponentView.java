@@ -1,6 +1,6 @@
-package client.view;
+package client.view.drawingComponents;
 
-import client.model.OvalComponent;
+import client.model.drawingComponents.OvalComponent;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;

@@ -1,6 +1,6 @@
 package client.controller;
 
-import client.model.DrawingComponent;
+import client.model.action.DeleteComponentAction;
 import client.view.ClientContainerView;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
@@ -9,10 +9,10 @@ import client.view.ToolbarView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 public class ClientContainerController {
     private ClientContainerView clientContainerView;
+    private boolean isFullscreen = false;
 
     public ClientContainerController(ClientContainerView clientContainerView) {
         this.clientContainerView = clientContainerView;
@@ -51,10 +51,20 @@ public class ClientContainerController {
         actionMap.put("delete", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                List<DrawingComponent> components = clientContainerView.getDrawingContainerView().getDrawing().getDrawingComponents();
-                for (DrawingComponent component : components) {
-                    if (component.isSelected())
-                        component.remove();
+                DeleteComponentAction deleteComponentAction = new DeleteComponentAction(clientContainerView.getDrawingContainerView().getDrawing());
+                clientContainerView.getDrawingContainerView().getDrawing().getActionStack().push(deleteComponentAction);
+            }
+        });
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), "fullscreen");
+        actionMap.put("fullscreen", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                isFullscreen = !isFullscreen;
+                if (isFullscreen) {
+                    clientContainerView.getClientFrameView().setExtendedState(JFrame.MAXIMIZED_BOTH);
+                } else {
+                    clientContainerView.getClientFrameView().setExtendedState(JFrame.NORMAL);
                 }
             }
         });

@@ -1,6 +1,6 @@
-package client.controller;
+package client.controller.drawingComponents;
 
-import client.view.RectangleComponentView;
+import client.view.drawingComponents.RectangleComponentView;
 
 public class RectangleComponentController extends DrawingComponentController {
     private RectangleComponentView rectangleComponentView;

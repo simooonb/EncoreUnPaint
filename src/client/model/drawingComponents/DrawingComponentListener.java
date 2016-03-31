@@ -1,4 +1,4 @@
-package client.model;
+package client.model.drawingComponents;
 
 public interface DrawingComponentListener {
     void onMoved();

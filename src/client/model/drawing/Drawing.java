@@ -1,4 +1,8 @@
-package client.model;
+package client.model.drawing;
+
+import client.model.action.ActionStack;
+import client.model.drawingComponents.DrawingComponent;
+import client.model.drawingComponents.DrawingComponentListener;
 
 import java.awt.*;
 import java.util.ArrayList;

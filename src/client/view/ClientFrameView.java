@@ -1,6 +1,6 @@
 package client.view;
 
-import client.model.Drawing;
+import client.model.drawing.Drawing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.*;
 public class ClientFrameView extends JFrame {
     private Drawing drawing = new Drawing();
 
-    private ClientContainerView clientContainerView = new ClientContainerView(drawing);
+    private ClientContainerView clientContainerView = new ClientContainerView(this, drawing);
 
     public ClientFrameView() {
         add(clientContainerView);

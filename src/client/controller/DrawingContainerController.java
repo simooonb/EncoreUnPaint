@@ -1,8 +1,17 @@
 package client.controller;
 
-import client.model.*;
+import client.controller.drawingComponents.LineComponentController;
+import client.controller.drawingComponents.OvalComponentController;
+import client.controller.drawingComponents.RectangleComponentController;
+import client.model.action.CreateOvalAction;
+import client.model.action.CreateRectangleAction;
+import client.model.drawing.DrawingListener;
+import client.model.drawingComponents.*;
 import client.view.*;
-import org.w3c.dom.css.Rect;
+import client.view.drawingComponents.DrawingComponentView;
+import client.view.drawingComponents.LineComponentView;
+import client.view.drawingComponents.OvalComponentView;
+import client.view.drawingComponents.RectangleComponentView;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -87,7 +96,7 @@ public class DrawingContainerController implements DrawingListener {
         updateView();
     }
 
-    class DrawingContainerListener extends MouseAdapter {
+    private class DrawingContainerListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent me) {
             if(drawingContainerView.getDrawing().getCurrentComponentSelected() != null) {
@@ -137,59 +146,55 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "rectangle": {
-                    Dimension dimRectangle = new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y));
-                    RectangleComponent newRectangleComponent = new RectangleComponent(new Rectangle(checkRectangleAndOvalCoordonates(),dimRectangle),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
-                    newRectangleComponent.setSelected(true);
-                    currentDrawingComponentSelected = newRectangleComponent;
-                    drawingContainerView.getDrawing().setCurrentComponentSelected(currentDrawingComponentSelected);
-                    drawingContainerView.getDrawing().addDrawingComponent(newRectangleComponent);
+                    CreateRectangleAction createRectangleAction = new CreateRectangleAction(
+                            drawingContainerView.getDrawing(),
+                            checkRectangleAndOvalCoordonates(),
+                            new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y)),
+                            drawingContainerView.getCurrentColorBackground(),
+                            drawingContainerView.getCurrentColorForeground()
+                    );
+                    drawingContainerView.getDrawing().getActionStack().push(createRectangleAction);
                     break;
                 }
 
                 case "oval": {
-                    Dimension dimOval = new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y));
-                    OvalComponent newOvalComponent = new OvalComponent(new Rectangle(checkRectangleAndOvalCoordonates(),dimOval),drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
-                    newOvalComponent.setSelected(true);
-                    currentDrawingComponentSelected = newOvalComponent;
-                    drawingContainerView.getDrawing().setCurrentComponentSelected(currentDrawingComponentSelected);
-                    drawingContainerView.getDrawing().addDrawingComponent(newOvalComponent);
+                    CreateOvalAction createOvalAction = new CreateOvalAction(
+                            drawingContainerView.getDrawing(),
+                            checkRectangleAndOvalCoordonates(),
+                            new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y)),
+                            drawingContainerView.getCurrentColorBackground(),
+                            drawingContainerView.getCurrentColorForeground()
+                    );
+                    drawingContainerView.getDrawing().getActionStack().push(createOvalAction);
                     break;
                 }
             }
         }
 
-        private void checkLinesCoordonates(){
+        private void checkLinesCoordonates() {
             int width = endingPoint.x - startingPoint.x;
             int height = endingPoint.y - startingPoint.y;
 
             invertHeight = false;
-            invertWidth = false;
 
-            if(width < 0){
-                invertWidth = true;
-            }
-            if(height < 0){
+            invertWidth = width < 0;
+
+            if (height < 0) {
                 invertHeight = true;
             }
-
-            return;
-
         }
 
-        private Point checkRectangleAndOvalCoordonates(){
+        private Point checkRectangleAndOvalCoordonates() {
             int width = endingPoint.x - startingPoint.x;
             int height = endingPoint.y - startingPoint.y;
-            if(width < 0 && height < 0){
+
+            if (width < 0 && height < 0) {
                 return endingPoint;
-            }
-            else if(width < 0){
+            } else if (width < 0) {
                 return new Point(endingPoint.x,startingPoint.y);
-            }
-            else if(height < 0){
+            } else if (height < 0) {
                 return new Point(startingPoint.x,endingPoint.y);
-            }
-            else
-            {
+            } else {
                 return startingPoint;
             }
         }

@@ -1,6 +1,6 @@
-package client.controller;
+package client.controller.drawingComponents;
 
-import client.view.LineComponentView;
+import client.view.drawingComponents.LineComponentView;
 
 public class LineComponentController extends DrawingComponentController {
     private LineComponentView lineComponentView;

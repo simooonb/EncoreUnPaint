@@ -1,6 +1,6 @@
-package client.model;
+package client.model.action;
 
-import client.view.DrawingComponentView;
+import client.view.drawingComponents.DrawingComponentView;
 
 import java.awt.*;
 

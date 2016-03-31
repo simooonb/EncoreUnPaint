@@ -1,9 +1,9 @@
-package client.view;
+package client.view.drawingComponents;
 
-import client.model.DrawingComponent;
-import client.model.LineComponent;
-import client.model.OvalComponent;
-import client.model.RectangleComponent;
+import client.model.drawingComponents.DrawingComponent;
+import client.model.drawingComponents.LineComponent;
+import client.model.drawingComponents.OvalComponent;
+import client.model.drawingComponents.RectangleComponent;
 
 import javax.swing.*;
 import java.awt.*;

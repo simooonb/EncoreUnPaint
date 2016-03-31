@@ -1,6 +1,6 @@
-package client.view;
+package client.view.drawingComponents;
 
-import client.model.RectangleComponent;
+import client.model.drawingComponents.RectangleComponent;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

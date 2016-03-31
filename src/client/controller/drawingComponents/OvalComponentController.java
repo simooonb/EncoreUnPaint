@@ -1,6 +1,6 @@
-package client.controller;
+package client.controller.drawingComponents;
 
-import client.view.OvalComponentView;
+import client.view.drawingComponents.OvalComponentView;
 
 public class OvalComponentController extends DrawingComponentController {
     private OvalComponentView ovalComponentView;

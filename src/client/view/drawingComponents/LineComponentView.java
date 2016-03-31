@@ -1,6 +1,6 @@
-package client.view;
+package client.view.drawingComponents;
 
-import client.model.LineComponent;
+import client.model.drawingComponents.LineComponent;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
@@ -35,8 +35,8 @@ public class LineComponentView extends DrawingComponentView {
             {
                 g2d.setStroke(new BasicStroke(1));
             }
-            Point startingPoint = null;
-            Point endingPoint = null;
+            Point startingPoint;
+            Point endingPoint;
             if(line.isInvertHeight() && line.isInvertWidth()){
                 startingPoint = new Point(line.getSize().width,line.getSize().height);
                 endingPoint = new Point(0,0);

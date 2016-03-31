@@ -1,9 +1,9 @@
-package client.controller;
+package client.controller.drawingComponents;
 
-import client.model.DrawingComponent;
-import client.model.DrawingComponentListener;
-import client.model.MoveComponentAction;
-import client.view.DrawingComponentView;
+import client.model.drawingComponents.DrawingComponent;
+import client.model.drawingComponents.DrawingComponentListener;
+import client.model.action.MoveComponentAction;
+import client.view.drawingComponents.DrawingComponentView;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;

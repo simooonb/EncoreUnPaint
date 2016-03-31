@@ -1,4 +1,4 @@
-package client.model;
+package client.model.action;
 
 public interface Action {
     void invoke();

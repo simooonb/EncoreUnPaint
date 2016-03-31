@@ -1,4 +1,6 @@
-package client.model;
+package client.model.drawingComponents;
+
+import client.model.drawing.Drawing;
 
 import java.awt.*;
 import java.util.ArrayList;
