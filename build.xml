@@ -1,0 +1,13 @@
+<project name="JPaint">
+    <target name="-post-compile">
+        <copy todir="./tools">
+            <fileset dir="out/production/JPaint/tools" includes="*"/>
+        </copy>
+    </target>
+
+    <target name="-post-jar">
+        <copy todir="out/dist/tools">
+            <fileset dir="out/production/JPaint/tools" includes="*"/>
+        </copy>
+    </target>
+</project>
