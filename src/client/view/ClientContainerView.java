@@ -1,6 +1,7 @@
 package client.view;
 
 import client.model.drawing.Drawing;
+import client.view.tools.ToolbarView;
 
 import javax.swing.*;
 import java.awt.*;

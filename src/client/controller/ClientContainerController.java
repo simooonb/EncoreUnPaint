@@ -4,7 +4,7 @@ import client.model.action.DeleteComponentAction;
 import client.view.ClientContainerView;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
-import client.view.ToolbarView;
+import client.view.tools.ToolbarView;
 
 import javax.swing.*;
 import java.awt.*;

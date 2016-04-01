@@ -1,17 +1,16 @@
-package client.view;
+package client.view.tools;
 
 import javax.swing.*;
+
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ToolbarView extends JToolBar{
-    private JButton selectForm;
-    private JButton fillForm;
-    private JButton drawOval;
-    private JButton drawRectangle;
-    private JButton drawLine;
-    private JPanel buttonPanel;
-    private JButton foregroundColorChooser;
-    private JButton backgroundColorChooser;
+
+    private List<Tool> toolList  = new ArrayList<>();
+    private JButton plus;
+    private JButton madness;
 
     private final Integer jtoolbarWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.2);
     private final Integer jtoolbarHeight = (Toolkit.getDefaultToolkit().getScreenSize().height)-155;
@@ -26,7 +25,12 @@ public class ToolbarView extends JToolBar{
         this.setFloatable(true);
         this.setRollover(true);
         this.setBorderPainted(true);
-        initButton();
+        plus = new JButton("+");
+        madness = new JButton("-");
+        this.add(plus);
+        this.add(madness);
+        this.addSeparator();
+        /*initButton();
         this.add(selectForm);
         this.addSeparator();
         this.add(fillForm);
@@ -37,10 +41,14 @@ public class ToolbarView extends JToolBar{
         this.addSeparator();
         this.add(drawLine);
         this.addSeparator();
-        this.add(buttonPanel);
+        this.add(buttonPanel);*/
     }
 
-    private void initButton(){
+    public void addTool(){
+
+    }
+
+    /*private void initButton(){
         selectForm = new JButton("Select");
         setButtonSize(selectForm,jtoolbarWidth -10,jtoolbarHeight/7);
         fillForm = new JButton("Fill");
@@ -80,5 +88,5 @@ public class ToolbarView extends JToolBar{
 
     public JButton getForegroundColorChooser() { return foregroundColorChooser; }
 
-    public JButton getBackgroundColorChooser() { return backgroundColorChooser; }
+    public JButton getBackgroundColorChooser() { return backgroundColorChooser; }*/
 }

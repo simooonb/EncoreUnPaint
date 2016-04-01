@@ -5,7 +5,7 @@ import client.model.drawingComponents.DrawingComponentListener;
 import client.model.drawing.DrawingListener;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
-import client.view.ToolbarView;
+import client.view.tools.ToolbarView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,7 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
         this.drawingContainerView = drawingContainerView;
         drawingContainerView.getDrawing().addDrawingListener(this);
 
-        this.toolbarView.getSelectForm().addActionListener(e -> {
+        /*this.toolbarView.getSelectForm().addActionListener(e -> {
             drawingContainerView.setCurrentStatus("selection");
             statusAreaView.editStatus("Selection form");
         });
@@ -63,8 +63,9 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
             drawingContainerView.setCurrentColorForeground(selectedColorForeground);
             toolbarView.getForegroundColorChooser().setBackground(selectedColorForeground);
             statusAreaView.editStatus("Foreground Color");
-        });
+        });*/
     }
+
     @Override
     public void onDrawingComponentAdded(DrawingComponent drawingComponent){
         drawingComponent.addDrawingComponentListener(this);
@@ -92,10 +93,10 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
 
     @Override
     public void onSelected(){
-        toolbarView.getForegroundColorChooser().setBackground(drawingContainerView.getDrawing().getCurrentComponentSelected().getForegroundColor());
+        /*toolbarView.getForegroundColorChooser().setBackground(drawingContainerView.getDrawing().getCurrentComponentSelected().getForegroundColor());
         toolbarView.getBackgroundColorChooser().setBackground(drawingContainerView.getDrawing().getCurrentComponentSelected().getBackgroundColor());
         selectedColorForeground = drawingContainerView.getDrawing().getCurrentComponentSelected().getForegroundColor();
-        selectedColorBackground = drawingContainerView.getDrawing().getCurrentComponentSelected().getBackgroundColor();
+        selectedColorBackground = drawingContainerView.getDrawing().getCurrentComponentSelected().getBackgroundColor();*/
     }
 
     @Override
