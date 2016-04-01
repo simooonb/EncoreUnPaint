@@ -28,12 +28,18 @@ public class ToolbarView extends JToolBar{
         plus = new JButton("+");
         minus = new JButton("-");
         this.add(plus);
+        setButtonSize(plus,25,25);
         this.add(minus);
+        setButtonSize(minus,25,25);
         this.addSeparator();
     }
 
     public void addTool(Tool tool){
         toolList.add(tool);
+        int nbTools = toolList.size();
+        for(Tool currentTool : toolList){
+            setButtonSize(currentTool, jtoolbarWidth-10,jtoolbarHeight / nbTools);
+        }
         this.add(tool);
     }
 
@@ -58,14 +64,15 @@ public class ToolbarView extends JToolBar{
         backgroundColorChooser.setBackground(Color.BLACK);
         buttonPanel.add(backgroundColorChooser);
         buttonPanel.add(foregroundColorChooser);
-    }
+    }*/
 
     private void setButtonSize(JButton button, int width, int height){
         button.setPreferredSize(new Dimension(width,height));
         button.setMaximumSize(button.getPreferredSize());
         button.setMinimumSize(button.getPreferredSize());
     }
-    public JButton getSelectForm() { return selectForm; }
+
+    /*public JButton getSelectForm() { return selectForm; }
 
     public JButton getFillForm() { return fillForm; }
 
