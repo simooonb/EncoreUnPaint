@@ -6,7 +6,11 @@ public class LineComponent extends DrawingComponent {
     private Point first, second;
     private boolean invertHeight = false, invertWidth = false;
 
-    public LineComponent(Point first, Point second,boolean invertWidth,boolean invertHeight,Color backgroundColor, Color foregroundColor) {
+    public LineComponent(Point first, Point second, Color backgroundColor, Color foregroundColor) {
+        this(first, second, false, false, backgroundColor, foregroundColor);
+    }
+
+    public LineComponent(Point first, Point second, boolean invertWidth, boolean invertHeight, Color backgroundColor, Color foregroundColor) {
         super(new Dimension(Math.abs(second.x - first.x), Math.abs(second.y - first.y)),backgroundColor,foregroundColor);
         this.first = first;
         this.second = second;

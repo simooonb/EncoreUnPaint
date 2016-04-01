@@ -24,8 +24,8 @@ public class CreateOvalAction implements Action {
     @Override
     public void invoke() {
         ovalComponent.setSelected(true);
-        drawing.setCurrentComponentSelected(ovalComponent);
         drawing.addDrawingComponent(ovalComponent);
+        drawing.setCurrentComponentSelected(ovalComponent);
     }
 
     @Override

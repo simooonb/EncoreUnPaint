@@ -99,12 +99,14 @@ public class DrawingContainerController implements DrawingListener {
     private class DrawingContainerListener extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent me) {
-            if(drawingContainerView.getDrawing().getCurrentComponentSelected() != null) {
+            if (drawingContainerView.getDrawing().getCurrentComponentSelected() != null) {
                 drawingContainerView.getDrawing().getCurrentComponentSelected().fireUnselected();
                 drawingContainerView.getDrawing().setCurrentComponentSelected(null);
             }
+
             String currentStatus = drawingContainerView.getCurrentStatus();
-            if(currentStatus.equals("none"))
+
+            if (currentStatus.equals("none"))
                 return;
 
             switch (currentStatus) {
