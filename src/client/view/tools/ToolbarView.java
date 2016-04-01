@@ -30,18 +30,6 @@ public class ToolbarView extends JToolBar{
         this.add(plus);
         this.add(madness);
         this.addSeparator();
-        /*initButton();
-        this.add(selectForm);
-        this.addSeparator();
-        this.add(fillForm);
-        this.addSeparator();
-        this.add(drawOval);
-        this.addSeparator();
-        this.add(drawRectangle);
-        this.addSeparator();
-        this.add(drawLine);
-        this.addSeparator();
-        this.add(buttonPanel);*/
     }
 
     public void addTool(){
