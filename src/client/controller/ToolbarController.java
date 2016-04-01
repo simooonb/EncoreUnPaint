@@ -37,7 +37,9 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
 
             if (chooser.showOpenDialog(toolbarView) == JFileChooser.APPROVE_OPTION) {
                 try {
-                    tool = Class.forName(chooser.getSelectedFile().getName());
+                    String str = chooser.getSelectedFile().getName();
+                    String className = (str.contains(".") ? str.substring(0, str.lastIndexOf('.')) : str);
+                    tool = Class.forName(className);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
