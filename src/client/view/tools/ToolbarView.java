@@ -10,7 +10,7 @@ public class ToolbarView extends JToolBar{
 
     private List<Tool> toolList  = new ArrayList<>();
     private JButton plus;
-    private JButton madness;
+    private JButton minus;
 
     private final Integer jtoolbarWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.2);
     private final Integer jtoolbarHeight = (Toolkit.getDefaultToolkit().getScreenSize().height)-155;
@@ -26,9 +26,9 @@ public class ToolbarView extends JToolBar{
         this.setRollover(true);
         this.setBorderPainted(true);
         plus = new JButton("+");
-        madness = new JButton("-");
+        minus = new JButton("-");
         this.add(plus);
-        this.add(madness);
+        this.add(minus);
         this.addSeparator();
         /*initButton();
         this.add(selectForm);
@@ -89,4 +89,12 @@ public class ToolbarView extends JToolBar{
     public JButton getForegroundColorChooser() { return foregroundColorChooser; }
 
     public JButton getBackgroundColorChooser() { return backgroundColorChooser; }*/
+
+    public JButton getPlus() {
+        return plus;
+    }
+
+    public JButton getMinus() {
+        return minus;
+    }
 }
