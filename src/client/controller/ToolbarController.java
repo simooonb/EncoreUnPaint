@@ -55,11 +55,11 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
             if (status == null || !(status.getType().getName().equals("String")))
                 return;
 
-            try {
-                toolInstance = (Tool) tool.newInstance();
-                toolbarView.add(toolInstance);
-            } catch (InstantiationException | IllegalAccessException e) {
-                e.printStackTrace();
+            try{
+                toolbarView.addTool((Tool)tool.newInstance());
+            }
+            catch(IllegalArgumentException | IllegalAccessException | InstantiationException ilae){
+                ilae.printStackTrace();
             }
         });
     }

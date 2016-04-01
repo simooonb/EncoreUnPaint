@@ -11,15 +11,12 @@ public class ToolForegroundColor extends Tool{
 
     public ToolForegroundColor(){
         super();
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getDrawingContainerView().setCurrentStatus(status);
-                selectedColorForeground = JColorChooser.showDialog(null, "Choose a color", selectedColorForeground);
-                getDrawingContainerView().setCurrentColorForeground(selectedColorForeground);
-                setBackground(selectedColorForeground);
-                getStatusAreaView().editStatus("Foreground Color");
-            }
+        addActionListener(e -> {
+            getDrawingContainerView().setCurrentStatus(status);
+            selectedColorForeground = JColorChooser.showDialog(null, "Choose a color", selectedColorForeground);
+            getDrawingContainerView().setCurrentColorForeground(selectedColorForeground);
+            setBackground(selectedColorForeground);
+            getStatusAreaView().editStatus("Foreground Color");
         });
     }
 }

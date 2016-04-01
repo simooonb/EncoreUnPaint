@@ -32,8 +32,9 @@ public class ToolbarView extends JToolBar{
         this.addSeparator();
     }
 
-    public void addTool(){
-
+    public void addTool(Tool tool){
+        toolList.add(tool);
+        this.add(tool);
     }
 
     /*private void initButton(){
