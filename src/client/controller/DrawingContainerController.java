@@ -3,6 +3,7 @@ package client.controller;
 import client.controller.drawingComponents.LineComponentController;
 import client.controller.drawingComponents.OvalComponentController;
 import client.controller.drawingComponents.RectangleComponentController;
+import client.model.action.CreateLineAction;
 import client.model.action.CreateOvalAction;
 import client.model.action.CreateRectangleAction;
 import client.model.drawing.DrawingListener;
@@ -139,11 +140,15 @@ public class DrawingContainerController implements DrawingListener {
 
                 case "line": {
                     checkLinesCoordonates();
-                    LineComponent newLineComponent = new LineComponent(startingPoint,endingPoint,invertWidth,invertHeight,drawingContainerView.getCurrentColorBackground(),drawingContainerView.getCurrentColorForeground());
-                    newLineComponent.setSelected(true);
-                    currentDrawingComponentSelected = newLineComponent;
-                    drawingContainerView.getDrawing().setCurrentComponentSelected(currentDrawingComponentSelected);
-                    drawingContainerView.getDrawing().addDrawingComponent(newLineComponent);
+                    CreateLineAction createLineAction = new CreateLineAction(
+                            drawingContainerView.getDrawing(),
+                            startingPoint,
+                            endingPoint,
+                            invertWidth,
+                            invertHeight,
+                            drawingContainerView.getCurrentColorBackground()
+                    );
+                    drawingContainerView.getDrawing().getActionStack().push(createLineAction);
                     break;
                 }
 

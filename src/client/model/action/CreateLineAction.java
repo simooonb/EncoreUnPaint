@@ -9,9 +9,9 @@ public class CreateLineAction implements Action {
     private Drawing drawing;
     private LineComponent line = null;
 
-    public CreateLineAction(Drawing drawing, Point start, Point end, Color background) {
+    public CreateLineAction(Drawing drawing, Point start, Point end, boolean invertWidth, boolean invertHeight, Color background) {
         this.drawing = drawing;
-        this.line = new LineComponent(start, end, background, Color.black);
+        this.line = new LineComponent(start, end, invertWidth, invertHeight, background, Color.black);
     }
 
     @Override
