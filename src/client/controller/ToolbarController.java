@@ -52,7 +52,7 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
                 e.printStackTrace();
             }
 
-            if (status == null)
+            if (status == null || !(status.getType().getName().equals("String")))
                 return;
 
             try {
