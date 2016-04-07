@@ -10,11 +10,13 @@ public abstract class Tool extends JButton{
     private DrawingContainerView drawingContainerView;
     private StatusAreaView statusAreaView;
 
-    public Tool(){
-        super();
+    public Tool(DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
+        this("",drawingContainerView,statusAreaView);
     }
-    public Tool(String title){
+    public Tool(String title, DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
         super(title);
+        this.drawingContainerView = drawingContainerView;
+        this.statusAreaView = statusAreaView;
     }
 
     public DrawingContainerView getDrawingContainerView() {

@@ -44,7 +44,4 @@ public class RectangleComponentView extends DrawingComponentView {
         return rectangle;
     }
 
-    public void setRectangle(RectangleComponent rectangle) {
-        this.rectangle = rectangle;
-    }
 }

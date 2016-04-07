@@ -19,7 +19,6 @@ abstract public class DrawingComponentView extends JPanel {
 
     public void update() {
         updateSize();
-        //updateLocation();
     }
 
     private void updateSize() {
@@ -47,9 +46,6 @@ abstract public class DrawingComponentView extends JPanel {
         return drawingComponent;
     }
 
-    public void setDrawingComponent(DrawingComponent drawingComponent) {
-        this.drawingComponent = drawingComponent;
-    }
 
     public Point getAnchorPoint() {
         return anchorPoint;

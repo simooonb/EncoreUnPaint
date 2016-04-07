@@ -1,13 +1,14 @@
 package client.view.tools;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import client.view.DrawingContainerView;
+import client.view.StatusAreaView;
 
 public class ToolRectangle extends Tool{
     private String status = "rectangle";
 
-    public ToolRectangle(){
-        super("Rectangle");
+    public ToolRectangle(DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
+        super("Rectangle",drawingContainerView, statusAreaView);
         addActionListener(e -> {
             getDrawingContainerView().setCurrentStatus(status);
             getStatusAreaView().editStatus("Rectangle");

@@ -2,13 +2,9 @@ package client.view;
 
 import client.model.drawing.Drawing;
 import client.view.drawingComponents.DrawingComponentView;
-import client.view.drawingComponents.LineComponentView;
-import client.view.drawingComponents.OvalComponentView;
-import client.view.drawingComponents.RectangleComponentView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,30 +34,6 @@ public class DrawingContainerView extends JPanel{
         repaint();
     }
 
-    public DrawingComponentView clickingPointInContainerView(Point clickingPoint){
-        for(DrawingComponentView drawingComponentView : drawingComponentViewList){
-            if(drawingComponentView instanceof RectangleComponentView){
-                RectangleComponentView rectangleView = (RectangleComponentView) drawingComponentView;
-                if(rectangleView.getBounds().contains(clickingPoint)){
-                    return drawingComponentView;
-                }
-            }
-            else if(drawingComponentView instanceof OvalComponentView){
-                OvalComponentView ovalView = (OvalComponentView) drawingComponentView;
-                if (ovalView.getBounds().contains(clickingPoint)) {
-                    return drawingComponentView;
-                }
-            }
-            else{
-                LineComponentView lineView = (LineComponentView) drawingComponentView;
-                double dist = Line2D.ptSegDist(lineView.getLine().getFirstPoint().x,lineView.getLine().getFirstPoint().y,lineView.getLine().getSecondPoint().x,lineView.getLine().getSecondPoint().y,clickingPoint.x,clickingPoint.y);
-                if(dist <= 2){
-                    return drawingComponentView;
-                }
-            }
-        }
-        return null;
-    }
 
     public void addView(DrawingComponentView drawingComponentView){
         drawingComponentViewList.add(drawingComponentView);

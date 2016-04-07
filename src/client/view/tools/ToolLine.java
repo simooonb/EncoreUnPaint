@@ -1,13 +1,14 @@
 package client.view.tools;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import client.view.DrawingContainerView;
+import client.view.StatusAreaView;
 
 public class ToolLine extends Tool{
     private String status = "line";
 
-    public ToolLine(){
-        super("Line");
+    public ToolLine(DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
+        super("Line",drawingContainerView,statusAreaView);
         addActionListener(e -> {
             getDrawingContainerView().setCurrentStatus(status);
             getStatusAreaView().editStatus("Line");

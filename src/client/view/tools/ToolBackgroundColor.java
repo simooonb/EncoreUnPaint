@@ -1,16 +1,22 @@
 package client.view.tools;
 
+import client.model.drawing.DrawingListener;
+import client.model.drawingComponents.DrawingComponent;
+import client.model.drawingComponents.DrawingComponentListener;
+import client.view.DrawingContainerView;
+import client.view.StatusAreaView;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ToolBackgroundColor extends Tool{
-    private Color selectedColorBackground;
+public class ToolBackgroundColor extends Tool implements DrawingListener,DrawingComponentListener{
+    private Color selectedColorBackground = Color.BLACK;
     private String status = "backgroundColor";
 
-    public ToolBackgroundColor(){
-        super();
+    public ToolBackgroundColor(DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
+        super("Background",drawingContainerView,statusAreaView);
+        drawingContainerView.getDrawing().addDrawingListener(this);
+        setBackground(selectedColorBackground);
         addActionListener(e -> {
             getDrawingContainerView().setCurrentStatus(status);
             selectedColorBackground = JColorChooser.showDialog(null, "Choose a color", selectedColorBackground);
@@ -19,4 +25,31 @@ public class ToolBackgroundColor extends Tool{
             getStatusAreaView().editStatus("Background Color");
         });
     }
+
+    @Override
+    public void onDrawingComponentAdded(DrawingComponent drawingComponent){
+        drawingComponent.addDrawingComponentListener(this);
+    }
+
+    @Override
+    public void onDrawingComponentRemoved(DrawingComponent drawingComponent){
+        drawingComponent.removeDrawingComponentListener(this);
+    }
+
+    @Override
+    public void onMoved(){}
+
+    @Override
+    public void onRemoved(){}
+
+    @Override
+    public void onColorChanged(){}
+
+    @Override
+    public void onSelected(){
+        setBackground(getDrawingContainerView().getDrawing().getCurrentComponentSelected().getBackgroundColor());
+    }
+
+    @Override
+    public void onUnselected(){}
 }

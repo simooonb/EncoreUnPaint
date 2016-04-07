@@ -45,7 +45,4 @@ public class OvalComponentView extends DrawingComponentView {
         return oval;
     }
 
-    public void setOval(OvalComponent oval) {
-        this.oval = oval;
-    }
 }

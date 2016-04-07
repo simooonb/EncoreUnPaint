@@ -60,8 +60,5 @@ public class LineComponentView extends DrawingComponentView {
         g.dispose();
     }
 
-    public LineComponent getLine() {
-        return line;
-    }
 
 }

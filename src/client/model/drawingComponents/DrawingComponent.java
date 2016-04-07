@@ -92,10 +92,6 @@ abstract public class DrawingComponent {
         return size;
     }
 
-    public void setSize(Dimension size) {
-        this.size = size;
-    }
-
     public Color getBackgroundColor() {
         return backgroundColor;
     }

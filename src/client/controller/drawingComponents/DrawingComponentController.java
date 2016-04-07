@@ -90,11 +90,7 @@ abstract public class DrawingComponentController implements DrawingComponentList
         }
 
         private void unselectAllOthers(){
-            for(DrawingComponent drawingComponent : drawingComponentView.getDrawingComponent().getDrawing().getDrawingComponents()){
-                if(drawingComponent != drawingComponentView.getDrawingComponent()){
-                    drawingComponent.fireUnselected();
-                }
-            }
+            drawingComponentView.getDrawingComponent().getDrawing().getDrawingComponents().stream().filter(drawingComponent -> drawingComponent != drawingComponentView.getDrawingComponent()).forEach(DrawingComponent::fireUnselected);
         }
     }
 }

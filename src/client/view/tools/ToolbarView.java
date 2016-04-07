@@ -1,5 +1,8 @@
 package client.view.tools;
 
+import client.view.DrawingContainerView;
+import client.view.StatusAreaView;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -15,8 +18,13 @@ public class ToolbarView extends JToolBar{
     private final Integer jtoolbarWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().width*0.2);
     private final Integer jtoolbarHeight = (Toolkit.getDefaultToolkit().getScreenSize().height)-155;
 
-    public ToolbarView(){
+    private DrawingContainerView drawingContainerView;
+    private StatusAreaView statusAreaView;
+
+    public ToolbarView(DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
         super(null, JToolBar.VERTICAL);
+        this.drawingContainerView = drawingContainerView;
+        this.statusAreaView = statusAreaView;
         setLayout(new FlowLayout(FlowLayout.LEFT));
         setSize(jtoolbarWidth,jtoolbarHeight);
         setPreferredSize((getSize()));
@@ -32,6 +40,8 @@ public class ToolbarView extends JToolBar{
         this.add(minus);
         setButtonSize(minus,25,25);
         this.addSeparator();
+        //initButton();
+         // uncomment if we want to do some tests with the buttons by default
     }
 
     public void addTool(Tool tool){
@@ -43,8 +53,20 @@ public class ToolbarView extends JToolBar{
         this.add(tool);
     }
 
-    /*private void initButton(){
-        selectForm = new JButton("Select");
+    private void initButton(){
+        ToolSelect toolSelect = new ToolSelect(drawingContainerView,statusAreaView);
+        ToolOval toolOval = new ToolOval(drawingContainerView,statusAreaView);
+        ToolRectangle toolRectangle = new ToolRectangle(drawingContainerView,statusAreaView);
+        ToolLine toolLine = new ToolLine(drawingContainerView,statusAreaView);
+        ToolForegroundColor toolForegroundColor = new ToolForegroundColor(drawingContainerView,statusAreaView);
+        ToolBackgroundColor toolBackgroundColor = new ToolBackgroundColor(drawingContainerView,statusAreaView);
+        add(toolSelect);
+        add(toolOval);
+        add(toolRectangle);
+        add(toolLine);
+        add(toolForegroundColor);
+        add(toolBackgroundColor);
+        /*selectForm = new JButton("Select");
         setButtonSize(selectForm,jtoolbarWidth -10,jtoolbarHeight/7);
         fillForm = new JButton("Fill");
         setButtonSize(fillForm,jtoolbarWidth -10,jtoolbarHeight/7);
@@ -63,8 +85,8 @@ public class ToolbarView extends JToolBar{
         setButtonSize(backgroundColorChooser,(jtoolbarWidth/2)-10,jtoolbarHeight/7);
         backgroundColorChooser.setBackground(Color.BLACK);
         buttonPanel.add(backgroundColorChooser);
-        buttonPanel.add(foregroundColorChooser);
-    }*/
+        buttonPanel.add(foregroundColorChooser);*/
+    }
 
     private void setButtonSize(JButton button, int width, int height){
         button.setPreferredSize(new Dimension(width,height));

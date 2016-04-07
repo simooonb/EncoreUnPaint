@@ -20,8 +20,7 @@ import java.awt.event.MouseEvent;
 
 public class DrawingContainerController implements DrawingListener {
     private DrawingContainerView drawingContainerView;
-    private Point startingPoint = null, endingPoint = null, clickingPoint = null;
-    private DrawingComponent currentDrawingComponentSelected = null;
+    private Point startingPoint = null, endingPoint = null;
     private boolean invertWidth = false, invertHeight = false;
 
     public DrawingContainerController(DrawingContainerView drawingContainerView) {
@@ -74,7 +73,6 @@ public class DrawingContainerController implements DrawingListener {
 
                 @Override
                 public void onColorChanged() {
-                    System.out.println("hello");
                     updateView();
                 }
 
@@ -120,7 +118,6 @@ public class DrawingContainerController implements DrawingListener {
                 case "fill":
                     break;
                 case "selection":
-                    clickingPoint = me.getPoint();
                     break;
             }
 
@@ -139,40 +136,46 @@ public class DrawingContainerController implements DrawingListener {
                 }
 
                 case "line": {
-                    checkLinesCoordonates();
-                    CreateLineAction createLineAction = new CreateLineAction(
-                            drawingContainerView.getDrawing(),
-                            startingPoint,
-                            endingPoint,
-                            invertWidth,
-                            invertHeight,
-                            drawingContainerView.getCurrentColorBackground()
-                    );
-                    drawingContainerView.getDrawing().getActionStack().push(createLineAction);
+                    if(!(startingPoint.equals(endingPoint))){
+                        checkLinesCoordonates();
+                        CreateLineAction createLineAction = new CreateLineAction(
+                                drawingContainerView.getDrawing(),
+                                startingPoint,
+                                endingPoint,
+                                invertWidth,
+                                invertHeight,
+                                drawingContainerView.getCurrentColorBackground()
+                        );
+                        drawingContainerView.getDrawing().getActionStack().push(createLineAction);
+                    }
                     break;
                 }
 
                 case "rectangle": {
-                    CreateRectangleAction createRectangleAction = new CreateRectangleAction(
-                            drawingContainerView.getDrawing(),
-                            checkRectangleAndOvalCoordonates(),
-                            new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y)),
-                            drawingContainerView.getCurrentColorBackground(),
-                            drawingContainerView.getCurrentColorForeground()
-                    );
-                    drawingContainerView.getDrawing().getActionStack().push(createRectangleAction);
+                    if(!(startingPoint.equals(endingPoint))){
+                        CreateRectangleAction createRectangleAction = new CreateRectangleAction(
+                                drawingContainerView.getDrawing(),
+                                checkRectangleAndOvalCoordonates(),
+                                new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y)),
+                                drawingContainerView.getCurrentColorBackground(),
+                                drawingContainerView.getCurrentColorForeground()
+                        );
+                        drawingContainerView.getDrawing().getActionStack().push(createRectangleAction);
+                    }
                     break;
                 }
 
                 case "oval": {
-                    CreateOvalAction createOvalAction = new CreateOvalAction(
-                            drawingContainerView.getDrawing(),
-                            checkRectangleAndOvalCoordonates(),
-                            new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y)),
-                            drawingContainerView.getCurrentColorBackground(),
-                            drawingContainerView.getCurrentColorForeground()
-                    );
-                    drawingContainerView.getDrawing().getActionStack().push(createOvalAction);
+                    if(!(startingPoint.equals(endingPoint))){
+                        CreateOvalAction createOvalAction = new CreateOvalAction(
+                                drawingContainerView.getDrawing(),
+                                checkRectangleAndOvalCoordonates(),
+                                new Dimension(Math.abs(endingPoint.x - startingPoint.x), Math.abs(endingPoint.y - startingPoint.y)),
+                                drawingContainerView.getCurrentColorBackground(),
+                                drawingContainerView.getCurrentColorForeground()
+                        );
+                        drawingContainerView.getDrawing().getActionStack().push(createOvalAction);
+                    }
                     break;
                 }
             }

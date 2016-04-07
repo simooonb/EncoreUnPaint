@@ -20,7 +20,7 @@ public class ClientContainerView extends JPanel {
         clientFrameView = frame;
         statusAreaView = new StatusAreaView();
         drawingContainerView = new DrawingContainerView(drawing);
-        toolbarView = new ToolbarView();
+        toolbarView = new ToolbarView(drawingContainerView,statusAreaView);
 
         add(drawingContainerView, BorderLayout.CENTER);
         add(toolbarView, BorderLayout.WEST);
