@@ -1,8 +1,8 @@
 package client.controller;
 
+import client.model.drawing.DrawingListener;
 import client.model.drawingComponents.DrawingComponent;
 import client.model.drawingComponents.DrawingComponentListener;
-import client.model.drawing.DrawingListener;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
 import client.view.tools.Tool;
@@ -10,18 +10,17 @@ import client.view.tools.ToolbarView;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.File;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
-public class ToolbarController implements DrawingComponentListener,DrawingListener{
+class ToolbarController implements DrawingComponentListener,DrawingListener{
     private ToolbarView toolbarView;
     private StatusAreaView statusAreaView;
     private DrawingContainerView drawingContainerView;
 
-    public ToolbarController(ToolbarView toolbarView, StatusAreaView statusAreaView, DrawingContainerView drawingContainerView) {
-
+    ToolbarController(ToolbarView toolbarView, StatusAreaView statusAreaView, DrawingContainerView drawingContainerView) {
         this.toolbarView = toolbarView;
         this.statusAreaView = statusAreaView;
         this.drawingContainerView = drawingContainerView;
@@ -31,15 +30,16 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Java Classes", "class");
             chooser.setFileFilter(filter);
-            Class tool = null;
+            Class<?> tool = null;
             Field status = null;
-            Tool toolInstance = null;
 
             if (chooser.showOpenDialog(toolbarView) == JFileChooser.APPROVE_OPTION) {
                 try {
-                    String str = chooser.getSelectedFile().getName();
-                    String className = (str.contains(".") ? str.substring(0, str.lastIndexOf('.')) : str);
-                    tool = Class.forName(className);
+                    File file = chooser.getSelectedFile();
+                    String ext = file.getName().substring(file.getName().lastIndexOf(".") + 1);
+                    String nameWithoutExt = file.getName().replaceAll("." + ext, "");
+                    String nameWithPackage = ToolbarView.class.getPackage().getName() + "." + nameWithoutExt;
+                    tool = Class.forName(nameWithPackage);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -54,13 +54,15 @@ public class ToolbarController implements DrawingComponentListener,DrawingListen
                 e.printStackTrace();
             }
 
-            if (status == null || !(status.getType().getName().equals("String")))
+            if (status == null || !"java.lang.String".equals(status.getType().getName()))
                 return;
 
-            try{
-                toolbarView.addTool((Tool)tool.newInstance());
+            try {
+                Constructor<?> constructor = tool.getConstructor(drawingContainerView.getClass(), statusAreaView.getClass());
+                Object o = constructor.newInstance(drawingContainerView, statusAreaView);
+                toolbarView.addTool((Tool) o);
             }
-            catch(IllegalArgumentException | IllegalAccessException | InstantiationException ilae){
+            catch (IllegalArgumentException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException ilae) {
                 ilae.printStackTrace();
             }
         });

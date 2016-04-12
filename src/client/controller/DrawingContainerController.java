@@ -8,7 +8,7 @@ import client.model.action.CreateOvalAction;
 import client.model.action.CreateRectangleAction;
 import client.model.drawing.DrawingListener;
 import client.model.drawingComponents.*;
-import client.view.*;
+import client.view.DrawingContainerView;
 import client.view.drawingComponents.DrawingComponentView;
 import client.view.drawingComponents.LineComponentView;
 import client.view.drawingComponents.OvalComponentView;
@@ -18,12 +18,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class DrawingContainerController implements DrawingListener {
+class DrawingContainerController implements DrawingListener {
     private DrawingContainerView drawingContainerView;
     private Point startingPoint = null, endingPoint = null;
     private boolean invertWidth = false, invertHeight = false;
 
-    public DrawingContainerController(DrawingContainerView drawingContainerView) {
+    DrawingContainerController(DrawingContainerView drawingContainerView) {
         this.drawingContainerView = drawingContainerView;
 
         drawingContainerView.addMouseListener(new DrawingContainerListener());

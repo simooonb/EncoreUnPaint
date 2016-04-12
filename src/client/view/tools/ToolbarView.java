@@ -4,8 +4,10 @@ import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
 
 import javax.swing.*;
-
 import java.awt.*;
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,69 +25,74 @@ public class ToolbarView extends JToolBar{
 
     public ToolbarView(DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
         super(null, JToolBar.VERTICAL);
+
         this.drawingContainerView = drawingContainerView;
         this.statusAreaView = statusAreaView;
+
         setLayout(new FlowLayout(FlowLayout.LEFT));
         setSize(jtoolbarWidth,jtoolbarHeight);
         setPreferredSize((getSize()));
         setMaximumSize(getSize());
         setMinimumSize(getSize());
-        this.setFloatable(true);
-        this.setRollover(true);
-        this.setBorderPainted(true);
+        setFloatable(true);
+        setRollover(true);
+        setBorderPainted(true);
+
         plus = new JButton("+");
-        minus = new JButton("-");
-        this.add(plus);
+        add(plus);
         setButtonSize(plus,25,25);
-        this.add(minus);
+
+        minus = new JButton("-");
+        add(minus);
         setButtonSize(minus,25,25);
-        this.addSeparator();
-        //initButton();
-         // uncomment if we want to do some tests with the buttons by default
+
+        addSeparator();
+        initButton();
     }
 
     public void addTool(Tool tool){
         toolList.add(tool);
         int nbTools = toolList.size();
-        for(Tool currentTool : toolList){
+
+        for (Tool currentTool : toolList){
             setButtonSize(currentTool, jtoolbarWidth-10,jtoolbarHeight / nbTools);
         }
+
         this.add(tool);
     }
 
-    private void initButton(){
-        ToolSelect toolSelect = new ToolSelect(drawingContainerView,statusAreaView);
-        ToolOval toolOval = new ToolOval(drawingContainerView,statusAreaView);
-        ToolRectangle toolRectangle = new ToolRectangle(drawingContainerView,statusAreaView);
-        ToolLine toolLine = new ToolLine(drawingContainerView,statusAreaView);
-        ToolForegroundColor toolForegroundColor = new ToolForegroundColor(drawingContainerView,statusAreaView);
-        ToolBackgroundColor toolBackgroundColor = new ToolBackgroundColor(drawingContainerView,statusAreaView);
-        add(toolSelect);
-        add(toolOval);
-        add(toolRectangle);
-        add(toolLine);
-        add(toolForegroundColor);
-        add(toolBackgroundColor);
-        /*selectForm = new JButton("Select");
-        setButtonSize(selectForm,jtoolbarWidth -10,jtoolbarHeight/7);
-        fillForm = new JButton("Fill");
-        setButtonSize(fillForm,jtoolbarWidth -10,jtoolbarHeight/7);
-        drawOval = new JButton("Oval");
-        setButtonSize(drawOval,jtoolbarWidth -10,jtoolbarHeight/7);
-        drawRectangle = new JButton("Rectangle");
-        setButtonSize(drawRectangle,jtoolbarWidth -10,jtoolbarHeight/7);
-        drawLine = new JButton("Line");
-        setButtonSize(drawLine,jtoolbarWidth -10,jtoolbarHeight/7);
-        buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout());
-        foregroundColorChooser = new JButton();
-        setButtonSize(foregroundColorChooser,(jtoolbarWidth/2)-10,jtoolbarHeight/7);
-        foregroundColorChooser.setBackground(Color.BLACK);
-        backgroundColorChooser = new JButton();
-        setButtonSize(backgroundColorChooser,(jtoolbarWidth/2)-10,jtoolbarHeight/7);
-        backgroundColorChooser.setBackground(Color.BLACK);
-        buttonPanel.add(backgroundColorChooser);
-        buttonPanel.add(foregroundColorChooser);*/
+    private void initButton() {
+        File toolsFolder = new File(ToolbarView.class.getProtectionDomain().getCodeSource().getLocation().getPath() + "/client/view/tools/");
+        String ext, nameWithoutExt, nameWithPackage;
+        Object o;
+        File[] fileList = toolsFolder.listFiles();
+
+        if (fileList == null)
+            return;
+
+        for (File file : fileList) {
+            o = null;
+            ext = file.getName().substring(file.getName().lastIndexOf(".") + 1);
+            nameWithoutExt = file.getName().replaceAll("." + ext, "");
+            nameWithPackage = ToolbarView.class.getPackage().getName() + "." + nameWithoutExt;
+
+            if ("Tool".equals(nameWithoutExt) || "ToolbarView".equals(nameWithoutExt))
+                continue;
+
+            if (file.isFile() && "class".equals(ext)) {
+                try {
+                    Class<?> tool = Class.forName(nameWithPackage);
+                    Constructor<?> constructor = tool.getConstructor(drawingContainerView.getClass(), statusAreaView.getClass());
+                    o = constructor.newInstance(drawingContainerView, statusAreaView);
+                } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+
+                if (o != null) {
+                    addTool((Tool) o);
+                }
+            }
+        }
     }
 
     private void setButtonSize(JButton button, int width, int height){
@@ -93,20 +100,6 @@ public class ToolbarView extends JToolBar{
         button.setMaximumSize(button.getPreferredSize());
         button.setMinimumSize(button.getPreferredSize());
     }
-
-    /*public JButton getSelectForm() { return selectForm; }
-
-    public JButton getFillForm() { return fillForm; }
-
-    public JButton getDrawOval() { return drawOval; }
-
-    public JButton getDrawRectangle() { return drawRectangle; }
-
-    public JButton getDrawLine() { return drawLine; }
-
-    public JButton getForegroundColorChooser() { return foregroundColorChooser; }
-
-    public JButton getBackgroundColorChooser() { return backgroundColorChooser; }*/
 
     public JButton getPlus() {
         return plus;

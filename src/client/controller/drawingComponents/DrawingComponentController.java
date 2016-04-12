@@ -1,8 +1,8 @@
 package client.controller.drawingComponents;
 
+import client.model.action.MoveComponentAction;
 import client.model.drawingComponents.DrawingComponent;
 import client.model.drawingComponents.DrawingComponentListener;
-import client.model.action.MoveComponentAction;
 import client.view.drawingComponents.DrawingComponentView;
 
 import java.awt.*;
@@ -10,10 +10,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-abstract public class DrawingComponentController implements DrawingComponentListener {
+abstract class DrawingComponentController implements DrawingComponentListener {
     private DrawingComponentView drawingComponentView;
 
-    public DrawingComponentController(DrawingComponentView drawingComponentView) {
+    DrawingComponentController(DrawingComponentView drawingComponentView) {
         this.drawingComponentView = drawingComponentView;
 
         DrawingComponentMouseListener listener = new DrawingComponentMouseListener();

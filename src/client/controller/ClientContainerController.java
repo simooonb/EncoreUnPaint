@@ -12,20 +12,18 @@ import client.view.ClientContainerView;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
 import client.view.tools.ToolbarView;
-import org.w3c.dom.css.Rect;
 
-import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class ClientContainerController {
+class ClientContainerController {
     private ClientContainerView clientContainerView;
     private boolean isFullscreen = false;
     private DrawingComponent drawingComponentCopy = null;
 
-    public ClientContainerController(ClientContainerView clientContainerView) {
+    ClientContainerController(ClientContainerView clientContainerView) {
         this.clientContainerView = clientContainerView;
 
         addShortcuts();
@@ -58,28 +56,30 @@ public class ClientContainerController {
             }
         });
 
-        inputMap.put(KeyStroke.getKeyStroke("control C"),"copy");
+        inputMap.put(KeyStroke.getKeyStroke("control C"), "copy");
         actionMap.put("copy", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DrawingComponent drawingComponentSelected = clientContainerView.getDrawingContainerView().getDrawing().getCurrentComponentSelected();
-                if(drawingComponentSelected == null)
+
+                if (drawingComponentSelected == null)
                     return;
+
                 drawingComponentCopy = drawingComponentSelected;
             }
         });
 
-        inputMap.put(KeyStroke.getKeyStroke("control V"),"paste");
+        inputMap.put(KeyStroke.getKeyStroke("control V"), "paste");
         actionMap.put("paste", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(drawingComponentCopy == null)
+                if (drawingComponentCopy == null)
                     return;
 
                 clientContainerView.getDrawingContainerView().getDrawing().getCurrentComponentSelected().fireUnselected();
                 clientContainerView.getDrawingContainerView().getDrawing().setCurrentComponentSelected(null);
 
-                if(drawingComponentCopy instanceof LineComponent){
+                if (drawingComponentCopy instanceof LineComponent){
                     LineComponent lineComponent = (LineComponent) drawingComponentCopy;
                     CreateLineAction createLineAction = new CreateLineAction(
                             clientContainerView.getDrawingContainerView().getDrawing(),
@@ -91,7 +91,7 @@ public class ClientContainerController {
                     );
                     clientContainerView.getDrawingContainerView().getDrawing().getActionStack().push(createLineAction);
 
-                }else if(drawingComponentCopy instanceof RectangleComponent){
+                } else if(drawingComponentCopy instanceof RectangleComponent){
                     RectangleComponent rectangleComponent = (RectangleComponent) drawingComponentCopy;
                     CreateRectangleAction createRectangleAction = new CreateRectangleAction(
                             clientContainerView.getDrawingContainerView().getDrawing(),
@@ -102,7 +102,7 @@ public class ClientContainerController {
                     );
                     clientContainerView.getDrawingContainerView().getDrawing().getActionStack().push(createRectangleAction);
 
-                }else if(drawingComponentCopy instanceof OvalComponent){
+                } else if(drawingComponentCopy instanceof OvalComponent){
                     OvalComponent ovalComponent = (OvalComponent) drawingComponentCopy;
                     CreateOvalAction createOvalAction = new CreateOvalAction(
                             clientContainerView.getDrawingContainerView().getDrawing(),

@@ -3,9 +3,6 @@ package client.view.tools;
 import client.view.DrawingContainerView;
 import client.view.StatusAreaView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class ToolOval extends Tool{
     private String status = "oval";
 
