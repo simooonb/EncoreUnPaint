@@ -10,6 +10,8 @@ import client.view.tools.ToolbarView;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -66,6 +68,8 @@ class ToolbarController implements DrawingComponentListener,DrawingListener{
                 ilae.printStackTrace();
             }
         });
+
+        toolbarView.getMinus().addActionListener(e -> toolbarView.removeLastTool());
     }
 
     @Override

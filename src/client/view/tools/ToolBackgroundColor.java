@@ -12,6 +12,7 @@ import java.awt.*;
 public class ToolBackgroundColor extends Tool implements DrawingListener,DrawingComponentListener{
     private Color selectedColorBackground = Color.BLACK;
     private String status = "backgroundColor";
+    private Color lastColorBackground = Color.BLACK;
 
     public ToolBackgroundColor(DrawingContainerView drawingContainerView, StatusAreaView statusAreaView){
         super("Background",drawingContainerView,statusAreaView);
@@ -19,7 +20,12 @@ public class ToolBackgroundColor extends Tool implements DrawingListener,Drawing
         setBackground(selectedColorBackground);
         addActionListener(e -> {
             getDrawingContainerView().setCurrentStatus(status);
+            if(lastColorBackground != selectedColorBackground){
+                lastColorBackground = selectedColorBackground;
+            }
             selectedColorBackground = JColorChooser.showDialog(null, "Choose a color", selectedColorBackground);
+            if(selectedColorBackground == null)
+                selectedColorBackground = lastColorBackground;
             getDrawingContainerView().setCurrentColorBackground(selectedColorBackground);
             setBackground(selectedColorBackground);
             getStatusAreaView().editStatus("Background Color");

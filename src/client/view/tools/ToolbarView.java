@@ -61,6 +61,18 @@ public class ToolbarView extends JToolBar{
         this.add(tool);
     }
 
+    public void removeLastTool(){
+        toolList.get(toolList.size()-1).setVisible(false);
+        this.remove(toolList.get(toolList.size()-1));
+        toolList.remove(toolList.size()-1);
+
+        int nbTools = toolList.size();
+
+        for (Tool currentTool : toolList){
+            setButtonSize(currentTool, jtoolbarWidth-10,jtoolbarHeight / nbTools);
+        }
+    }
+
     private void initButton() {
         File toolsFolder = new File(ToolbarView.class.getProtectionDomain().getCodeSource().getLocation().getPath() + "/client/view/tools/");
         String ext, nameWithoutExt, nameWithPackage;

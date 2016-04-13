@@ -87,7 +87,7 @@ class ClientContainerController {
                             new Point(clientContainerView.getDrawingContainerView().getMousePosition().x + (lineComponent.getSecondPoint().x - lineComponent.getFirstPoint().x),clientContainerView.getDrawingContainerView().getMousePosition().y + (lineComponent.getSecondPoint().y - lineComponent.getFirstPoint().y)),
                             lineComponent.isInvertWidth(),
                             lineComponent.isInvertHeight(),
-                            clientContainerView.getDrawingContainerView().getCurrentColorBackground()
+                            lineComponent.getBackgroundColor()
                     );
                     clientContainerView.getDrawingContainerView().getDrawing().getActionStack().push(createLineAction);
 
@@ -97,8 +97,8 @@ class ClientContainerController {
                             clientContainerView.getDrawingContainerView().getDrawing(),
                             clientContainerView.getDrawingContainerView().getMousePosition(),
                             new Dimension(Math.abs((int)rectangleComponent.getBoundingBox().getWidth()), Math.abs((int)rectangleComponent.getBoundingBox().getHeight())),
-                            clientContainerView.getDrawingContainerView().getCurrentColorBackground(),
-                            clientContainerView.getDrawingContainerView().getCurrentColorForeground()
+                            rectangleComponent.getBackgroundColor(),
+                            rectangleComponent.getForegroundColor()
                     );
                     clientContainerView.getDrawingContainerView().getDrawing().getActionStack().push(createRectangleAction);
 
@@ -108,8 +108,8 @@ class ClientContainerController {
                             clientContainerView.getDrawingContainerView().getDrawing(),
                             clientContainerView.getDrawingContainerView().getMousePosition(),
                             new Dimension(Math.abs((int)ovalComponent.getBoundingBox().getWidth()), Math.abs((int)ovalComponent.getBoundingBox().getHeight())),
-                            clientContainerView.getDrawingContainerView().getCurrentColorBackground(),
-                            clientContainerView.getDrawingContainerView().getCurrentColorForeground()
+                            ovalComponent.getBackgroundColor(),
+                            ovalComponent.getForegroundColor()
                     );
                     clientContainerView.getDrawingContainerView().getDrawing().getActionStack().push(createOvalAction);
                 }
